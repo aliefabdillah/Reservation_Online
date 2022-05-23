@@ -9,13 +9,40 @@ use Illuminate\Routing\Controller as BaseController;
 
 class Controller extends BaseController
 {
-    public function welcome()
+    public function landing()
     {
-        return view('welcome');
+        return view('landing');
+    }
+    
+    public function formTmptDuduk()
+    {
+        return view('formTmptDuduk');
     }
 
-    public function checkoutValidation()
+    public function submitTmptDuduk()
     {
-        return view('checkoutValidation');
+        # upload data pesanan tempat duduk ke database
+
+        // menampilkan view menu
+        return view('menu');
     }
+
+    public function submitMenu()
+    {
+        # upload data menu yang dipilih ke database
+
+        // menampilkan view invoice
+        return view('invoice');
+    }
+
+    public function validationSucces()
+    {
+        return view('validationSucces');
+    }
+    
+    public function validationFailed()
+    {
+        return view('validationFailed');
+    }
+
 }

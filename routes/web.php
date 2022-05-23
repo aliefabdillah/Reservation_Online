@@ -15,10 +15,27 @@ use App\Http\Controllers\Controller;
 |
 */
 
-Route::get('/welcome', [Controller::class,'welcome'])->name('home.welcome');
+/* USER */
+//landing page 
+Route::get('/user/welcome', [Controller::class,'landing'])->name('landing');                //route landing page
 
-Route::get('/signIn', [LoginController::class,'signIn'])->name('login.signIn');
+// tempat duduk
+Route::get('/user/tempatDuduk', [Controller::class,'formTmptDuduk'])->name('tmptDuduk');    //route tempat duduk
 
-Route::get('/register', [LoginController::class,'register'])->name('login.register');
+// login
+Route::get('/user/signIn', [LoginController::class,'signIn'])->name('signIn');              //route menampilkan form sign in
 
-Route::get('/end', [Controller::class,'checkoutValidation'])->name('end.validation');
+Route::get('/user/register', [LoginController::class,'register'])->name('register');        //route menampilkan form register
+
+Route::post('/user/register', [LoginController::class,'submitDataRegister'])->name('submit.register');        //submit form register
+
+// tampil menu sekaligus upload data tempat duduk
+Route::get('/user/menu', [Controller::class,'submitTmptDuduk'])->name('menu');                               //route submit data tempat duduk sekaligus tampil form menu
+
+// tampil invoice sekaligus upload data menu
+Route::post('/user/invoice', [Controller::class,'submitMenu'])->name('invoice');                             //submit/checkout form menu dan menampilkan invoice
+
+// Validation
+Route::get('/user/validation', [Controller::class,'validationSucces'])->name('validation');                 //tampil validation succes
+
+Route::get('/user/validation', [Controller::class,'validationFailed'])->name('validation');                 //tampil validation failed

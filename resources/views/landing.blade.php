@@ -82,7 +82,7 @@
 		<div class="hero-text">
 			<h1>Pemesanan <br> Restoran XXX</h1>
 			<p class="slogan mt-1">lebih simple, lebih mudah!</p>
-			<a href="{{ route('login.signIn') }}"><button type="button" class="btn btn-light btn-lg">Pesan Sekarang</button></a>
+			<a href="{{ route('tmptDuduk') }}"><button type="button" class="btn btn-light btn-lg">Pesan Sekarang</button></a>
 		</div>
 	</div>
 </body>
