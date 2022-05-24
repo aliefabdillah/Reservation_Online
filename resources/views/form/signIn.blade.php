@@ -34,7 +34,18 @@
   <div class="container shadow pt-4 pb-5 px-5 rounded bg-white" style="max-width:500px">
     <div class="wrapper">
       <h1 class="text-center mb-4">Login</h1>
+      @if(\Session::has('alert'))
+        <div class="alert alert-danger">
+            <div>{{Session::get('alert')}}</div>
+        </div>
+      @endif
+      @if(\Session::has('alert-success'))
+        <div class="alert alert-success">
+            <div>{{Session::get('alert-success')}}</div>
+        </div>
+      @endif
       <form action="" method="post">
+        @csrf
         <div class="mb-3">
           <label for="username" class="form-label">Email</label>
           <input type="text" name="email" id="email" class="form-control"
@@ -46,7 +57,7 @@
           <input type="checkbox" onclick="myFunction()"> Show Password
         </div>
         <div class="mb-3">
-          <label>Belum Pernah Memesan sebelumnya? <a href="{{ route('login.register') }}">Register Now!</a></label>
+          <label>Belum Pernah Memesan sebelumnya? <a href="{{ route('register') }}">Register Now!</a></label>
         </div>
         <input type="submit" name="submit" value="Login" class="w-100 btn btn-primary">
       </form>

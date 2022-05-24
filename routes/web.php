@@ -18,13 +18,15 @@ use App\Http\Controllers\Controller;
 
 /* USER */
 //landing page 
-Route::get('/user/welcome', [Controller::class,'landing'])->name('landing');                //route landing page
+Route::get('/', [Controller::class,'landing'])->name('landing');                //route landing page
 
 // tempat duduk
 Route::get('/user/tempatDuduk', [Controller::class,'formTmptDuduk'])->name('tmptDuduk');    //route tempat duduk
 
 // login
 Route::get('/user/signIn', [LoginController::class,'signIn'])->name('signIn');              //route menampilkan form sign in
+
+Route::post('/user/signIn', [LoginController::class,'signInSubmit'])->name('submit.signIn');              //route melakukan proses login saat menekan tombol
 
 Route::get('/user/register', [LoginController::class,'register'])->name('register');        //route menampilkan form register
 
