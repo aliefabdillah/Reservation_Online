@@ -31,26 +31,29 @@
   <div class="container shadow pt-4 pb-5 px-5 rounded bg-white" style="max-width:500px">
     <h1 class="text-center mb-1">Register </h1>
     <h1 class="text-center mb-4">Data Pemesan </h1>
-    <?php
-        // cek status
-        // if (isset($_GET['status'])) {
-        //     if ($_GET['status'] == 1) {
-        //         echo "<div class=\"alert alert-success\">SIGN UP SUCCESS - <a href='login.php'> Kembali ke Halaman Login</div>";
-        //     }
-        //     else {``
-        //         echo "<div class=\"alert alert-danger\">SIGN UP GAGAL</div>";
-        //     }
-        // }
-    ?>
-    <form action="" method="post">
+    <!-- cek status -->
+    @if ($errors->any())
+      <div class="alert alert-danger">
+          <ul>
+              @foreach ($errors->all() as $error)
+                  <li>{{ $error }}</li>
+              @endforeach
+          </ul>
+      </div>
+    @endif
+    <form action="{{ route('submit.register') }}" method="post">
+      @csrf
       <div class="mb-3">
         <label for="nama" class="form-label">Nama</label>
-        <input type="text" name="nama" id="nama" class="form-control"
-          value="<?php echo isset($nama) ? $nama : ""?>">
+        <input type="text" name="nama" id="nama" class="form-control">
       </div>
       <div class="mb-3">
         <label for="telepon" class="form-label">Nomor Telepon</label>
-        <input type="text" name="telepon" id="telepon" class="form-control">
+        <input type="text" name="telp" id="telepon" class="form-control">
+      </div>
+      <div class="mb-3">
+        <label for="alamat" class="form-label">Alamat</label>
+        <input type="text" name="alamat" id="alamat" class="form-control">
       </div>
       <div class="mb-3">
         <label for="email" class="form-label">Email </label>
