@@ -18,4 +18,13 @@ class LoginController extends BaseController
     {
         return view('form.register');
     }
+
+    public function submitDataRegister()
+    {
+        // create ke database data pemesan
+
+
+        // menampilkan register dan status pendaftaran
+        return view('form.register');
+    }
 }
