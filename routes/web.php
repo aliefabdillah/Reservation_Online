@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\TransactionDetailController;
+use App\Http\Controllers\MenuController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +18,7 @@ use App\Http\Controllers\Controller;
 |
 */
 
+Route::get('/{transaction}', [TransactionDetailController::class, 'show']);
 /* USER */
 //landing page 
 Route::get('/user/welcome', [Controller::class,'landing'])->name('landing');                //route landing page
@@ -31,8 +34,7 @@ Route::get('/user/register', [LoginController::class,'register'])->name('registe
 Route::post('/user/register', [LoginController::class,'submitDataRegister'])->name('submit.register');        //submit form register
 
 // tampil menu sekaligus upload data tempat duduk
-Route::post('/user/menu', [Controller::class,'submitTmptDuduk'])->name('menu');                               //route submit data tempat duduk sekaligus tampil form menu
-
+Route::post('/user/menu', [Controller::class,'submitTmptDuduk'])->name('menu');      
 // tampil invoice sekaligus upload data menu
 Route::post('/user/invoice', [Controller::class,'submitMenu'])->name('invoice');                             //submit/checkout form menu dan menampilkan invoice
 
