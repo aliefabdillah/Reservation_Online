@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Controller;
 
@@ -30,7 +31,7 @@ Route::get('/user/register', [LoginController::class,'register'])->name('registe
 Route::post('/user/register', [LoginController::class,'submitDataRegister'])->name('submit.register');        //submit form register
 
 // tampil menu sekaligus upload data tempat duduk
-Route::get('/user/menu', [Controller::class,'submitTmptDuduk'])->name('menu');                               //route submit data tempat duduk sekaligus tampil form menu
+Route::post('/user/menu', [Controller::class,'submitTmptDuduk'])->name('menu');                               //route submit data tempat duduk sekaligus tampil form menu
 
 // tampil invoice sekaligus upload data menu
 Route::post('/user/invoice', [Controller::class,'submitMenu'])->name('invoice');                             //submit/checkout form menu dan menampilkan invoice
@@ -39,3 +40,14 @@ Route::post('/user/invoice', [Controller::class,'submitMenu'])->name('invoice');
 Route::get('/user/validation', [Controller::class,'validationSucces'])->name('validation');                 //tampil validation succes
 
 Route::get('/user/validation', [Controller::class,'validationFailed'])->name('validation');                 //tampil validation failed
+
+
+/* ADMIN */
+// Login Page
+Route::get('/admin/signIn', [AdminController::class,'adminSignIn'])->name('adminSignIn');              //route menampilkan form sign in untuk admin
+
+// Submit Login dan tampilkan form berhasil login
+Route::post('/admin/signIn', [AdminController::class,'adminSignInPost'])->name('signInPost');              //route untuk tombol submit login dan cek session
+
+// Menampilkan tabel Tempat duduk
+Route::get('/admin/dataTmptDuduk', [AdminController::class,'showTmptDuduk'])->name('showTmptDuduk');              //route menampilkan form sign in untuk admin
