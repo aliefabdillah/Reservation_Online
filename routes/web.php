@@ -18,22 +18,22 @@ use App\Http\Controllers\Controller;
 
 /* USER */
 //landing page 
-Route::get('/', [Controller::class,'landing'])->name('landing');                //route landing page
+Route::get('/', [Controller::class,'landing'])->name('landing');                                            //route landing page
 
 // tempat duduk
-Route::get('/user/tempatDuduk', [Controller::class,'formTmptDuduk'])->name('tmptDuduk');    //route tempat duduk
+Route::get('/user/tempatDuduk', [SeatController::class,'formTmptDuduk'])->name('tmptDuduk');                    //route tempat duduk
 
 // login
-Route::get('/user/signIn', [LoginController::class,'signIn'])->name('signIn');              //route menampilkan form sign in
+Route::get('/user/signIn', [LoginController::class,'signIn'])->name('signIn');                              //route menampilkan form sign in
 
-Route::post('/user/signIn', [LoginController::class,'signInSubmit'])->name('submit.signIn');              //route melakukan proses login saat menekan tombol
+Route::post('/user/signIn', [LoginController::class,'signInSubmit'])->name('submit.signIn');                //route melakukan proses login saat menekan tombol
 
-Route::get('/user/register', [LoginController::class,'register'])->name('register');        //route menampilkan form register
+Route::get('/user/register', [LoginController::class,'register'])->name('register');                        //route menampilkan form register
 
 Route::post('/user/register', [LoginController::class,'submitDataRegister'])->name('submit.register');        //submit form register
 
 // tampil menu sekaligus upload data tempat duduk
-Route::post('/user/menu', [Controller::class,'submitTmptDuduk'])->name('menu');                               //route submit data tempat duduk sekaligus tampil form menu
+Route::post('/user/menu', [SeatController::class,'submitTmptDuduk'])->name('menu');                               //route submit data tempat duduk sekaligus tampil form menu
 
 // tampil invoice sekaligus upload data menu
 Route::post('/user/invoice', [Controller::class,'submitMenu'])->name('invoice');                             //submit/checkout form menu dan menampilkan invoice
