@@ -17,25 +17,37 @@ class LoginController extends BaseController
 
     public function signInSubmit(Request $request)
     {
-        $email = $request->email;
-        $password = md5($request->password);
-
-        $data = Customer::where('email',$email)->first();
-        if($data){ //apakah email tersebut ada atau tidak
-            if($password == $data->password){
-                Session::put('nama',$data->nama);
-                Session::put('email',$data->email);
-                Session::put('login',TRUE);
-
-                // ceritanya redirect ke landing dulu
-                return redirect()->route('landing');
+        if (!empty($request->email) && !empty($request->password) ) {
+            $email = $request->email;
+            $password = md5($request->password);
+    
+            $data = Customer::where('email',$email)->first();
+            if($data){ //apakah email tersebut ada atau tidak
+                if($password == $data->password){
+                    Session::put('nama',$data->nama);
+                    Session::put('email',$data->email);
+                    Session::put('login',TRUE);
+    
+                    // ceritanya redirect ke landing dulu
+                    return redirect()->route('landing');
+                }
+                else{
+                    return redirect()->route('signIn')->with('alert','Password, Salah !');
+                }
             }
             else{
-                return redirect()->route('signIn')->with('alert','Password, Salah !');
+                return redirect()->route('signIn')->with('alert','Email Belum Terdaftar!');
             }
-        }
-        else{
-            return redirect()->route('signIn')->with('alert','Email Belum Terdaftar!');
+        }else {
+            if (empty($request->email) && empty($request->password)) {
+                return redirect()->route('adminSignIn')->with('alert','Email atau Password Tidak Boleh Kosong!');
+            }
+            elseif (empty($request->email)) {
+                return redirect()->route('signIn')->with('alert','Email Tidak Boleh Kosong!');
+            }
+            elseif (empty($request->password)) {
+                return redirect()->route('signIn')->with('alert','Password Tidak Boleh Kosong!');
+            }
         }
     }
 
@@ -67,7 +79,7 @@ class LoginController extends BaseController
         $data->save();
 
         // menampilkan register dan status pendaftaran
-        return redirect()->route('signIn')->with('alert-success', 'Penambahan data Berhasil');
+        return redirect()->route('signIn')->with('alert-success', 'Register Berhasil!');
     }
 
     
