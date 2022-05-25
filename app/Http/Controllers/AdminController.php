@@ -21,6 +21,30 @@ class AdminController extends Controller
         }
     }
     
+    // menampilkan tabel Makanan
+    public function showMakanan()
+    {
+        if (!Session::get('login')) {
+            return redirect()->route('adminSignIn')->with('alert', 'Anda Harus Login!');
+        }
+        else {
+            // redirect ke view tabel tempat duduk
+            return view('admin.tabelMakanan');
+        }
+    }
+
+    // menampilkan tabel Minuman
+    public function showMinuman()
+    {
+        if (!Session::get('login')) {
+            return redirect()->route('adminSignIn')->with('alert', 'Anda Harus Login!');
+        }
+        else {
+            // redirect ke view tabel tempat duduk
+            return view('admin.tabelMinuman');
+        }
+    }
+
     public function adminSignIn(){
         return view('form.adminSignIn');
     }

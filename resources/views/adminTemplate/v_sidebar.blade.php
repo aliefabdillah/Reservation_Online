@@ -36,33 +36,26 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
-              <p>
-                Dashboard
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{ asset('template') }}/index.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Dashboard v1</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{ asset('template') }}/index2.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Dashboard v2</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{ asset('template') }}/index3.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Dashboard v3</p>
-                </a>
-              </li>
-            </ul>
+            <li class="nav-item">
+              <a href="{{ route('showTmptDuduk') }}" class="nav-link">
+                <i class="nav-icon fas fa-chair"></i>
+                <p>
+                  Tempat Duduk
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{ route('showMakanan') }}" class="nav-link">
+                <i class="fas fa-utensils nav-icon"></i>
+                <p>Makanan</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{ route('showMinuman') }}" class="nav-link">
+                <i class="fas fa-cocktail nav-icon"></i>
+                <p>Minuman</p>
+              </a>
+            </li>
             <li class="nav-item">
               <a href="{{ route('adminLogout') }}" class="nav-link">
                 <i class="nav-icon fas fa-sign-out-alt"></i>
