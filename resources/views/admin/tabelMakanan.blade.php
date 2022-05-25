@@ -8,12 +8,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>List Tempat Duduk</h1>
+                <h1>List Makanan</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="">Home</a></li>
-                <li class="breadcrumb-item active">Tempat Duduk</li>
+                <li class="breadcrumb-item active">Makanan</li>
                 </ol>
             </div>
             </div>
@@ -22,7 +22,7 @@
 
         <!-- Main content -->
         <section class="content">
-            <h1>ISINYA TABEL TEMPAT DUDUK</h1>
+            <h1>ISINYA TABEL MAKANAN</h1>
         </section>
         <!-- /.content -->
     </div>
