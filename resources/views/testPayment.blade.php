@@ -70,18 +70,18 @@
                         <table class="table table-hover table-condensed">
                             <tr>
                                 <td>ID</td>
-                                <td><b>#{{ $transaction->number }}</b></td>
+                                <td><b>#{{ $details->number }}</b></td>
                             </tr>
                             <tr>
                                 <td>Total Harga</td>
-                                <td><b>Rp {{ number_format($transaction->total_price, 2, ',') }}</b></td>
+                                <td><b>Rp {{ number_format($details->total_price, 2, ',') }}</b></td>
                             </tr>
                             <tr>
                                 <td>Status Pembayaran</td>
                                 <td><b>
-                                        @if ($transaction->payment_status == 1)
+                                        @if ($details->payment_status == 1)
                                             Menunggu Pembayaran
-                                        @elseif ($transaction->payment_status == 2)
+                                        @elseif ($details->payment_status == 2)
                                             Sudah Dibayar
                                         @else
                                             Kadaluarsa
@@ -121,13 +121,13 @@
                 onSuccess: function(result) {
                     /* You may add your own js here, this is just example */
                     // document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
-                    console.log(result)
+                    window.location.replace("http://www.w3schools.com");
                 },
                 // Optional
                 onPending: function(result) {
                     /* You may add your own js here, this is just example */
                     // document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
-                    console.log(result)
+                    window.location.replace("http://www.w3schools.com");
                 },
                 // Optional
                 onError: function(result) {

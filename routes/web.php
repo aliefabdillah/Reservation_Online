@@ -6,6 +6,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\TransactionDetailController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,11 +18,16 @@ use App\Http\Controllers\MenuController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::post('/testPayment', [OrderController::class, 'makeInvoice'])->name('check');
+Route::get('/testPayment', function (){
+    return view('test');
+});
 Route::get('/{transaction}', [TransactionDetailController::class, 'show']);
 /* USER */
-//landing page 
-Route::get('/', [Controller::class,'landing'])->name('landing');                //route landing page
+//landing page
+Route::get('/welcome', function (){
+    return view('landing');
+})->name('landing');                //route landing page
 
 // tempat duduk
 Route::get('/user/tempatDuduk', [Controller::class,'formTmptDuduk'])->name('tmptDuduk');    //route tempat duduk
@@ -36,7 +42,7 @@ Route::get('/user/register', [LoginController::class,'register'])->name('registe
 Route::post('/user/register', [LoginController::class,'submitDataRegister'])->name('submit.register');        //submit form register
 
 // tampil menu sekaligus upload data tempat duduk
-Route::post('/user/menu', [Controller::class,'submitTmptDuduk'])->name('menu');      
+Route::post('/user/menu', [Controller::class,'submitTmptDuduk'])->name('menu');
 // tampil invoice sekaligus upload data menu
 Route::post('/user/invoice', [Controller::class,'submitMenu'])->name('invoice');                             //submit/checkout form menu dan menampilkan invoice
 

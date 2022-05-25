@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Seat extends Model
 {
     use HasFactory;
+    public function order(){
+        return $this->hasMany(Order::class);
+    }
 }

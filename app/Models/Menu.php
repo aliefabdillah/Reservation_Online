@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Menu extends Model
 {
     use HasFactory;
+
+    public function order(){
+        return $this->belongsToMany(Order::class, "order_menus");
+    }
 }
