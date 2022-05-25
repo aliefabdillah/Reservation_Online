@@ -20,7 +20,7 @@ class AdminController extends Controller
             return view('admin.tabelTmptDuduk');
         }
     }
-    
+
     public function adminSignIn(){
         return view('form.adminSignIn');
     }
@@ -30,14 +30,16 @@ class AdminController extends Controller
         if (!empty($request->email) && !empty($request->password) ) {
             $email = $request->email;
             $password = md5($request->password);
-    
+
             $data = Admin::where('email',$email)->first();
             if($data){ //apakah email tersebut ada atau tidak
                 if($password == $data->password){
+                    Session::put('id', $data->id);
                     Session::put('nama',$data->nama);
                     Session::put('email',$data->email);
+                    Session::put('level', 'admin');
                     Session::put('login',TRUE);
-    
+
                     // ceritanya redirect ke landing dulu
                     return redirect()->route('showTmptDuduk');
                 }
@@ -65,5 +67,5 @@ class AdminController extends Controller
         Session::flush();
         return redirect()->route('adminSignIn')->with('alert','Anda Telah Logout!');
     }
-    
+
 }

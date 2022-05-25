@@ -11,6 +11,7 @@ use App\Services\InvoiceService;
 use App\Services\Midtrans\CreateSnapTokenService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class OrderController extends Controller
 {
@@ -18,8 +19,8 @@ class OrderController extends Controller
     public function makeInvoice(Request $request){
         $order = Order::create([
             'waktu_reservasi' => date('Y-m-d H:i:s'),
-            'customer_id' => 1, // change later
-            'seat_id' => 1 // change later
+            'customer_id' => Session::get("id"),
+            'seat_id' => $request->seat_id
         ]);
         $order->save();
 

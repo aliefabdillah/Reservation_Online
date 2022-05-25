@@ -20,14 +20,16 @@ class LoginController extends BaseController
         if (!empty($request->email) && !empty($request->password) ) {
             $email = $request->email;
             $password = md5($request->password);
-    
+
             $data = Customer::where('email',$email)->first();
             if($data){ //apakah email tersebut ada atau tidak
                 if($password == $data->password){
+                    Session::put('id', $data->id);
                     Session::put('nama',$data->nama);
                     Session::put('email',$data->email);
+                    Session::put('level', 'customer');
                     Session::put('login',TRUE);
-    
+
                     // ceritanya redirect ke landing dulu
                     return redirect()->route('landing');
                 }
@@ -82,7 +84,7 @@ class LoginController extends BaseController
         return redirect()->route('signIn')->with('alert-success', 'Register Berhasil!');
     }
 
-    
 
-    
+
+
 }

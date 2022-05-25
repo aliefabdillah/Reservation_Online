@@ -17,7 +17,7 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->timestamp('waktu_reservasi');
+            $table->timestamp('waktu_reservasi')->nullable();
             // $table->integer('diskon');
             $table->bigInteger('total_harga')->nullable();
             $table->foreignIdFor(Customer::class);
