@@ -5,6 +5,9 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SeatController;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\TransactionDetailController;
+use App\Http\Controllers\MenuController;
+use App\Http\Controllers\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,9 +19,13 @@ use App\Http\Controllers\Controller;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::post('/testPayment', [OrderController::class, 'makeInvoice'])->name('check');
+Route::get('/testPayment', function (){
+    return view('test');
+});
+Route::get('/{transaction}', [TransactionDetailController::class, 'show']);
 /* USER */
-//landing page 
+//landing page
 Route::get('/', [Controller::class,'landing'])->name('landing');                                            //route landing page
 
 // tempat duduk

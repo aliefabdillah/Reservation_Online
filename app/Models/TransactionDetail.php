@@ -8,4 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class TransactionDetail extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'jenis_pembayaran' => "dp",
+            'number',
+            'total_price',
+            'payment_status',
+            'transaction_id',
+            'sisa'
+    ];
+
+    public function transaction(){
+        return $this->belongsTo(Transaction::class);
+    }
 }

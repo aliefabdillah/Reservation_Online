@@ -19,7 +19,7 @@ class CreateOrdersTable extends Migration
             $table->id();
             $table->timestamp('waktu_reservasi');
             // $table->integer('diskon');
-            $table->bigInteger('total_harga');
+            $table->bigInteger('total_harga')->nullable();
             $table->foreignIdFor(Customer::class);
             $table->foreignIdFor(Seat::class);
             $table->timestamps();
