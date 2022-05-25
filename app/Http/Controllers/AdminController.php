@@ -16,8 +16,8 @@ class AdminController extends Controller
             return redirect()->route('adminSignIn')->with('alert', 'Anda Harus Login!');
         }
         else {
-            // ceritanya pake landing page dlu karena ui table tempat duduk nya blom jadi
-            return view('landing');
+            // redirect ke view tabel tempat duduk
+            return view('admin.tabelTmptDuduk');
         }
     }
     
@@ -59,6 +59,11 @@ class AdminController extends Controller
                 return redirect()->route('adminSignIn')->with('alert','Password Tidak Boleh Kosong!');
             }
         }
+    }
+
+    public function adminLogout(){
+        Session::flush();
+        return redirect()->route('adminSignIn')->with('alert','Anda Telah Logout!');
     }
     
 }

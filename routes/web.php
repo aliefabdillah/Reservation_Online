@@ -52,5 +52,8 @@ Route::get('/admin/signIn', [AdminController::class,'adminSignIn'])->name('admin
 // Submit Login dan tampilkan form berhasil login
 Route::post('/admin/signIn', [AdminController::class,'adminSignInPost'])->name('signInPost');              //route untuk tombol submit login dan cek session
 
+// Logout dari tampilan admin
+Route::get('/admin/logout', [AdminController::class,'adminLogout'])->name('adminLogout');
+
 // Menampilkan tabel Tempat duduk
 Route::get('/admin/dataTmptDuduk', [AdminController::class,'showTmptDuduk'])->name('showTmptDuduk');              //route menampilkan form sign in untuk admin
