@@ -24,12 +24,13 @@ Route::get('/testPayment', function (){
     return view('test');
 });
 Route::get('/{transaction}', [TransactionDetailController::class, 'show']);
+
 /* USER */
 //landing page
 Route::get('/', [Controller::class,'landing'])->name('landing');                                            //route landing page
 
 // tempat duduk
-Route::get('/user/tempatDuduk', [SeatController::class,'formTmptDuduk'])->name('tmptDuduk');                    //route tempat duduk
+Route::get('/user/tempatDuduk', [SeatController::class,'formTmptDuduk'])->name('tmptDuduk');                //route tempat duduk
 
 // login
 Route::get('/user/signIn', [LoginController::class,'signIn'])->name('signIn');                              //route menampilkan form sign in
@@ -40,11 +41,16 @@ Route::get('/user/register', [LoginController::class,'register'])->name('registe
 
 Route::post('/user/register', [LoginController::class,'submitDataRegister'])->name('submit.register');        //submit form register
 
-// tampil menu sekaligus upload data tempat duduk
-Route::post('/user/menu', [SeatController::class,'submitTmptDuduk'])->name('menu');                               //route submit data tempat duduk sekaligus tampil form menu
+// submit data tempat duduk
+Route::post('/user/tempatDuduk', [SeatController::class,'submitTmptDuduk'])->name('submit.tempatDuduk');              //route ketika menekan submit data tempat duduk
 
-// tampil invoice sekaligus upload data menu
-Route::post('/user/invoice', [Controller::class,'submitMenu'])->name('invoice');                             //submit/checkout form menu dan menampilkan invoice
+// Menu
+Route::get('/user/menu', [MenuController::class,'menu'])->name('menu');                                     //route menampilkan view menu
+
+Route::post('/user/menu', [MenuController::class,'submitMenu'])->name('submit.menu');                       //route ketika menekan tombol checkout pada menu
+
+// tampilkan view invoice 
+Route::post('/user/invoice', [Controller::class,'invoice'])->name('invoice');                               //submit/checkout form menu dan menampilkan invoice
 
 // Validation
 Route::get('/user/validation', [Controller::class,'validationSucces'])->name('validation');                 //tampil validation succes
@@ -54,19 +60,19 @@ Route::get('/user/validation', [Controller::class,'validationFailed'])->name('va
 
 /* ADMIN */
 // Login Page
-Route::get('/admin/signIn', [AdminController::class,'adminSignIn'])->name('adminSignIn');              //route menampilkan form sign in untuk admin
+Route::get('/admin/signIn', [AdminController::class,'adminSignIn'])->name('adminSignIn');                   //route menampilkan form sign in untuk admin
 
 // Submit Login dan tampilkan form berhasil login
-Route::post('/admin/signIn', [AdminController::class,'adminSignInPost'])->name('signInPost');              //route untuk tombol submit login dan cek session
+Route::post('/admin/signIn', [AdminController::class,'adminSignInPost'])->name('signInPost');               //route untuk tombol submit login dan cek session
 
 // Logout dari tampilan admin
 Route::get('/admin/logout', [AdminController::class,'adminLogout'])->name('adminLogout');
 
 // Menampilkan tabel Reservasi
-Route::get('/admin/daftarOrder', [AdminController::class,'showOrder'])->name('showOrder');              //route menampilkan Tabel Daftar Reservasi
+Route::get('/admin/daftarOrder', [AdminController::class,'showOrder'])->name('showOrder');                      //route menampilkan Tabel Daftar Reservasi
 
 // Menampilkan tabel Tempat duduk
-Route::get('/admin/dataTmptDuduk', [AdminController::class,'showTmptDuduk'])->name('showTmptDuduk');              //route menampilkan Tabel Tempat Duduk untuk Admin
+Route::get('/admin/dataTmptDuduk', [AdminController::class,'showTmptDuduk'])->name('showTmptDuduk');            //route menampilkan Tabel Tempat Duduk untuk Admin
 
 // Menampilkan tabel Makanan
 Route::get('/admin/makanan', [AdminController::class,'showMakanan'])->name('showMakanan');                      //route menampilkan tabel makanan 
