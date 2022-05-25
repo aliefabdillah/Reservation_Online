@@ -13,19 +13,6 @@ class Controller extends BaseController
     {
         return view('landing');
     }
-    
-    public function formTmptDuduk()
-    {
-        return view('formTmptDuduk');
-    }
-
-    public function submitTmptDuduk()
-    {
-        # upload data pesanan tempat duduk ke database
-
-        // menampilkan view menu
-        return view('menu');
-    }
 
     public function submitMenu()
     {
