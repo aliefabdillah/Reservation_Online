@@ -10,6 +10,18 @@ use Illuminate\Support\Facades\Session;
 class AdminController extends Controller
 {
     // menampilkan tabel tempat duduk
+    public function showOrder()
+    {
+        if (!Session::get('login')) {
+            return redirect()->route('adminSignIn')->with('alert', 'Anda Harus Login!');
+        }
+        else {
+            // redirect ke view tabel tempat duduk
+            return view('admin.tabelOrder');
+        }
+    }
+
+    // menampilkan tabel tempat duduk
     public function showTmptDuduk()
     {
         if (!Session::get('login')) {
@@ -65,7 +77,7 @@ class AdminController extends Controller
                     Session::put('login',TRUE);
 
                     // ceritanya redirect ke landing dulu
-                    return redirect()->route('showTmptDuduk');
+                    return redirect()->route('showOrder');
                 }
                 else{
                     return redirect()->route('adminSignIn')->with('alert','Password, Salah !');

@@ -62,6 +62,9 @@ Route::post('/admin/signIn', [AdminController::class,'adminSignInPost'])->name('
 // Logout dari tampilan admin
 Route::get('/admin/logout', [AdminController::class,'adminLogout'])->name('adminLogout');
 
+// Menampilkan tabel Reservasi
+Route::get('/admin/daftarOrder', [AdminController::class,'showOrder'])->name('showOrder');              //route menampilkan Tabel Daftar Reservasi
+
 // Menampilkan tabel Tempat duduk
 Route::get('/admin/dataTmptDuduk', [AdminController::class,'showTmptDuduk'])->name('showTmptDuduk');              //route menampilkan Tabel Tempat Duduk untuk Admin
 

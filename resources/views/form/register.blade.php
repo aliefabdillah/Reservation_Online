@@ -32,7 +32,7 @@
     <h1 class="text-center mb-1">Register </h1>
     <h1 class="text-center mb-4">Data Pemesan </h1>
     <!-- cek status -->
-    @if ($errors->any())
+    <!-- @if ($errors->any())
       <div class="alert alert-danger">
           <ul>
               @foreach ($errors->all() as $error)
@@ -40,28 +40,43 @@
               @endforeach
           </ul>
       </div>
-    @endif
+    @endif -->
     <form action="{{ route('submit.register') }}" method="post">
       @csrf
       <div class="mb-3">
         <label for="nama" class="form-label">Nama</label>
-        <input type="text" name="nama" id="nama" class="form-control">
+        <input type="text" name="nama" id="nama" class="form-control @error('nama') is-invalid @enderror" value="{{ old('nama') }}">
+        @error('nama')
+          <div class="text-danger">{{ $message }}</div>
+        @enderror
       </div>
       <div class="mb-3">
         <label for="telepon" class="form-label">Nomor Telepon</label>
-        <input type="text" name="telp" id="telepon" class="form-control">
+        <input type="text" name="telp" id="telp" class="form-control @error('telp') is-invalid @enderror" value="{{ old('telepon') }}">
+        @error('telp')
+          <div class="text-danger">{{ $message }}</div>
+        @enderror
       </div>
       <div class="mb-3">
         <label for="alamat" class="form-label">Alamat</label>
-        <input type="text" name="alamat" id="alamat" class="form-control">
+        <input type="text" name="alamat" id="alamat" class="form-control @error('alamat') is-invalid @enderror" value="{{ old('alamat') }}">
+        @error('alamat')
+          <div class="text-danger">{{ $message }}</div>
+        @enderror
       </div>
       <div class="mb-3">
         <label for="email" class="form-label">Email </label>
-        <input type="text" name="email" id="email" class="form-control">
+        <input type="text" name="email" id="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}">
+        @error('email')
+          <div class="text-danger">{{ $message }}</div>
+        @enderror
       </div>
       <div class="mb-3">
         <label for="password" class="form-label">Password </label>
-        <input type="password" name="password" id="password" class="form-control">
+        <input type="password" name="password" id="password" class="form-control @error('password') is-invalid @enderror">
+        @error('password')
+          <div class="text-danger">{{ $message }}</div>
+        @enderror
         <input type="checkbox" onclick="myFunction()"> Show Password
       </div>
       <input type="submit" name="submit" value="Register" class="w-100 btn btn-primary">

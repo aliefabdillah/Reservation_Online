@@ -63,7 +63,7 @@ class LoginController extends BaseController
         // ambil dan validasi data dari form
         $validateData = $request->validate([
             'nama'          => 'required|min:3',
-            'telp'          => 'required|max:15',
+            'telp'          => 'required|min:12|max:15',
             'alamat'        => 'required',
             'email'         => 'required|min:4|email|unique:customers',
             'password'      => 'required|min:8',
