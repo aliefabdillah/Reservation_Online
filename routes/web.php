@@ -66,7 +66,7 @@ Route::get('/admin/logout', [AdminController::class,'adminLogout'])->name('admin
 Route::get('/admin/dataTmptDuduk', [AdminController::class,'showTmptDuduk'])->name('showTmptDuduk');              //route menampilkan Tabel Tempat Duduk untuk Admin
 
 // Menampilkan tabel Makanan
-Route::get('/admin/makanan', [AdminController::class,'showMakanan'])->name('showMakanan');             
+Route::get('/admin/makanan', [AdminController::class,'showMakanan'])->name('showMakanan');                      //route menampilkan tabel makanan 
 
 // Menampilkan tabel Minuman
-Route::get('/admin/minuman', [AdminController::class,'showMinuman'])->name('showMinuman');             
+Route::get('/admin/minuman', [AdminController::class,'showMinuman'])->name('showMinuman');                      //route menampilkan tabel minuman

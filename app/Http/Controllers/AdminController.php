@@ -28,7 +28,7 @@ class AdminController extends Controller
             return redirect()->route('adminSignIn')->with('alert', 'Anda Harus Login!');
         }
         else {
-            // redirect ke view tabel tempat duduk
+            // redirect ke view tabel makanan
             return view('admin.tabelMakanan');
         }
     }
@@ -40,7 +40,7 @@ class AdminController extends Controller
             return redirect()->route('adminSignIn')->with('alert', 'Anda Harus Login!');
         }
         else {
-            // redirect ke view tabel tempat duduk
+            // redirect ke view tabel minuman
             return view('admin.tabelMinuman');
         }
     }
