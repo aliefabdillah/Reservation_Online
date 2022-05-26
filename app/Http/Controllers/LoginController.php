@@ -30,8 +30,8 @@ class LoginController extends BaseController
                     Session::put('level', 'customer');
                     Session::put('login',TRUE);
 
-                    // ceritanya redirect ke landing dulu
-                    return redirect()->route('landing');
+                    // setelah login akan redirect ke form tempat duduk
+                    return redirect()->route('tmptDuduk');
                 }
                 else{
                     return redirect()->route('signIn')->with('alert','Password, Salah !');

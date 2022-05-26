@@ -9,7 +9,7 @@ class SeatController extends Controller
 {
     public function formTmptDuduk()
     {
-        return view('formTmptDuduk');
+        return view('v_testSeat');
     }
 
     public function submitTmptDuduk()

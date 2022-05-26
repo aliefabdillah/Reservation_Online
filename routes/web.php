@@ -33,7 +33,7 @@ Route::get('/user/logout', [CustomerController::class,'customerLogout'])->name('
 //landing page
 Route::get('/', [Controller::class,'landing'])->name('landing');                                            //route landing page
 
-// tempat duduk
+// tampil pilihan tempat duduk
 Route::get('/user/tempatDuduk', [SeatController::class,'formTmptDuduk'])->name('tmptDuduk');                //route tempat duduk
 
 // login
@@ -45,7 +45,7 @@ Route::get('/user/register', [LoginController::class,'register'])->name('registe
 
 Route::post('/user/register', [LoginController::class,'submitDataRegister'])->name('submit.register');        //submit form register
 
-// submit data tempat duduk
+// submit form tempat duduk
 Route::post('/user/tempatDuduk', [SeatController::class,'submitTmptDuduk'])->name('submit.tempatDuduk');              //route ketika menekan submit data tempat duduk
 
 // Menu
@@ -76,7 +76,7 @@ Route::get('/admin/logout', [AdminController::class,'adminLogout'])->name('admin
 Route::get('/admin/daftarOrder', [AdminController::class,'showOrder'])->name('showOrder');                      //route menampilkan Tabel Daftar Reservasi
 
 // Menampilkan tabel Tempat duduk
-Route::get('/admin/dataTmptDuduk', [AdminController::class,'showTmptDuduk'])->name('showTmptDuduk');            //route menampilkan Tabel Tempat Duduk untuk Admin
+Route::get('/admin/daftarTempatDuduk', [AdminController::class,'showTmptDuduk'])->name('showTmptDuduk');            //route menampilkan Tabel Tempat Duduk untuk Admin
 
 // Menampilkan tabel Makanan
 Route::get('/admin/makanan', [AdminController::class,'showMakanan'])->name('showMakanan');                      //route menampilkan tabel makanan 

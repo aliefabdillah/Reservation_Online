@@ -7,8 +7,8 @@ use Illuminate\Support\Facades\Session;
 
 class CustomerController extends Controller
 {
-    public function adminLogout(){
+    public function customerLogout(){
         Session::flush();
-        return redirect()->route('signIn')->with('alert','Anda Telah Logout!');
+        return redirect()->route('tmptDuduk');
     }
 }
