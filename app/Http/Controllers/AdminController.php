@@ -9,6 +9,13 @@ use Illuminate\Support\Facades\Session;
 
 class AdminController extends Controller
 {
+    public function __construct()
+    {
+        if (!Session::get('login')) {
+            return redirect()->route('adminSignIn')->with('alert', 'Anda Harus Login Terlebih Dahulu!');
+        }
+    }
+    
     // menampilkan tabel tempat duduk
     public function showOrder()
     {
