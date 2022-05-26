@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Seat extends Model
 {
     use HasFactory;
+
+    protected $guarded = [];
+    
     public function order(){
         return $this->hasMany(Order::class);
     }

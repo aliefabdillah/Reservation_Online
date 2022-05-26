@@ -73,10 +73,22 @@ Route::post('/admin/signIn', [AdminController::class,'adminSignInPost'])->name('
 Route::get('/admin/logout', [AdminController::class,'adminLogout'])->name('adminLogout');
 
 // Menampilkan tabel Reservasi
-Route::get('/admin/daftarOrder', [AdminController::class,'showOrder'])->name('showOrder');                      //route menampilkan Tabel Daftar Reservasi
+Route::get('/admin/daftarOrder', [AdminController::class,'showOrder'])->name('showOrder');                                                  //route menampilkan Tabel Daftar Reservasi
 
 // Menampilkan tabel Tempat duduk
-Route::get('/admin/daftarTempatDuduk', [AdminController::class,'showTmptDuduk'])->name('showTmptDuduk');            //route menampilkan Tabel Tempat Duduk untuk Admin
+Route::get('/admin/daftarTempatDuduk', [AdminController::class,'showTmptDuduk'])->name('showTmptDuduk');                                    //route menampilkan Tabel Tempat Duduk untuk Admin
+
+// Fitur Pencarian Pada View Tempat Duduk
+Route::get('/admin/daftarTempatDuduk/cari', [AdminController::class,'searchSeat'])->name('searchSeat');                                    //route menampilkan Tabel Tempat Duduk untuk Admin
+
+// CRUD SEAT
+Route::post('/admin/daftarTempatDuduk', [AdminController::class,'storeSeat'])->name('addSeat');                                             //route menambahkan data tempat duduk baru ke database
+
+Route::put('/admin/daftarTempatDuduk/{seatId}', [AdminController::class,'updateStatusSeat'])->name('updateStatusSeat');                   //route menambahkan data tempat duduk baru ke database
+
+Route::put('/admin/daftarTempatDuduk', [AdminController::class,'editSeat'])->name('editSeat');                             //route edit data seat
+
+Route::delete('/admin/daftarTempatDuduk/{seatId}', [AdminController::class,'deleteSeat'])->name('deleteSeat');                   //route menghapus data seat dari database
 
 // Menampilkan tabel Makanan
 Route::get('/admin/makanan', [AdminController::class,'showMakanan'])->name('showMakanan');                      //route menampilkan tabel makanan 
