@@ -16,7 +16,8 @@
         @csrf
         <div class="mb-3">
             <label>Waktu Kedatangan :</label>
-            <input type="time" name="waktu">
+            <input type="time" min="10:00" max="22:00" name="waktu"><br>
+            <p>Waktu Operasional Restoran dari jam 10:00 - 22:00</p>
         </div>
         <div class="mb-3">
             <label>Tempat:</label>
