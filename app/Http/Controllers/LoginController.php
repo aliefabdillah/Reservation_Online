@@ -42,7 +42,7 @@ class LoginController extends BaseController
             }
         }else {
             if (empty($request->email) && empty($request->password)) {
-                return redirect()->route('adminSignIn')->with('alert','Email atau Password Tidak Boleh Kosong!');
+                return redirect()->route('signIn')->with('alert','Email atau Password Tidak Boleh Kosong!');
             }
             elseif (empty($request->email)) {
                 return redirect()->route('signIn')->with('alert','Email Tidak Boleh Kosong!');
