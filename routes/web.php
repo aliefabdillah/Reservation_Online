@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SeatController;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\TransactionDetailController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\OrderController;
@@ -26,6 +27,9 @@ Route::get('/testPayment', function (){
 Route::get('/{transaction}', [TransactionDetailController::class, 'show']);
 
 /* USER */
+// NAVBAR BUTTON logout
+Route::get('/user/logout', [CustomerController::class,'customerLogout'])->name('customerLogout');           //route logout pada navbar customer dan akan meredirect ke form login
+
 //landing page
 Route::get('/', [Controller::class,'landing'])->name('landing');                                            //route landing page
 
