@@ -13,13 +13,14 @@
         <a href="{{ route('customerLogout') }}"><button type="button" class="btn btn-danger float-end">Logout</button></a>
     @endif
     <form class="form" action="{{ route('submit.tempatDuduk') }}" method="post">
+        @csrf
         <div class="mb-3">
             <label>Waktu Kedatangan :</label>
-            <input name="waktu">
+            <input type="time" name="waktu">
         </div>
         <div class="mb-3">
             <label>Tempat:</label>
-            <input name="waktu">
+            <input type="text" name="tempatDuduk">
         </div>
         @if(\Session::get('login') == TRUE)
             <input type="submit" name="submit" value="Submit" class="btn btn-primary">
@@ -27,5 +28,10 @@
             <label>Untuk Memilih Tempat Duduk Anda Perlu Login? <a href="{{ route('signIn') }}">Login Sekarang!</a></label>
         @endif
     </form>
+    @if(\Session::has('alert'))
+        <div class="alert alert-danger">
+            <div>{{Session::get('alert')}}</div>
+        </div>
+    @endif
 </body>
 </html>
