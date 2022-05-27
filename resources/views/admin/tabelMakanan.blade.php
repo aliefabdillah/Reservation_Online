@@ -50,7 +50,7 @@
                     @csrf
                     @method('PUT')
                     <div class="container-md p-4 my-3 border">
-                        <input class="form-control" type="text" name="id" id="fid">
+                        <input class="form-control" type="text" name="id" id="fid" hidden>
                         <div class="row mb-3">
                             <label>Nama Makanan</label>  
                             <input class="form-control" type="text" name="namaMenu" id="fnamaMenu">

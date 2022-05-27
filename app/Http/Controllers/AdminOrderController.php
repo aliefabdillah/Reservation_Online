@@ -33,6 +33,16 @@ class AdminOrderController extends Controller
         }
     }
 
+    public function searchOrder(Request $request)
+    {
+        $result = Order::where('orders.id', 'like', "%{$request->search}%")
+                        ->join('customers', 'customers.id', '=', 'orders.customer_id')
+                        ->join('seats', 'seats.id', '=', 'orders.seat_id')
+                        ->get(['orders.*', 'customers.nama', 'customers.telp', 'seats.nama AS kode_seat']);
+        
+        return view('admin.tabelOrder', ['data_orders' => $result]);
+    }
+
     // hapus data seat dari db
     public function deleteOrder($id)
     {

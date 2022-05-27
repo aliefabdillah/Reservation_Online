@@ -1,7 +1,7 @@
 @extends('adminTemplate.v_template')
 
 @section('content')
-    <!-- Modal Detail Start-->
+    <!-- Modal Edit Start-->
     <div class="modal fade" id="detailOrder" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
@@ -27,7 +27,7 @@
             </div>
         </div>
     </div>
-    <!-- Modal Detaik End-->
+    <!-- Modal Edit End-->
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -58,7 +58,7 @@
             <div class="row mb-3">
                 <div class="col-sm-6">
                     <!-- buat form search  -->
-                    <form action="" method="get">
+                    <form action="{{ route('searchOrder') }}" method="get">
                         @csrf
                         <h2 class="Head-index"></h2>
                         <label class="ms-3">Cari : </label> 
@@ -100,7 +100,7 @@
                                     <form class="" action="{{ route('deleteOrder', ['orderId' => $order->id]) }}" method="post">
                                         @method('delete')
                                         @csrf
-                                        <a href="#" name="submit" value="{{}}" class='btn btn-danger btn-sm me-3'>Detail</a>
+                                        <input type='submit' name="submit" value="Delete" class='btn btn-danger btn-sm me-3'>
                                     </form>
                                 </div>
                             </td>
