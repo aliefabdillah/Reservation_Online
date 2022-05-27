@@ -26,7 +26,7 @@ class Controller extends BaseController
     {
         return view('validationSucces');
     }
-    
+
     public function validationFailed()
     {
         return view('validationFailed');
