@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Session;
 class OrderController extends Controller
 {
     //
-    public function makeInvoice(Request $request){
+    public function checkout(Request $request){
         $order = Order::create([
             'waktu_reservasi' => Carbon::createFromFormat("H:i", $request->waktu),
             'customer_id' => Session::get("id"),

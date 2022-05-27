@@ -23,7 +23,7 @@ use App\Http\Controllers\OrderController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::post('/testPayment', [OrderController::class, 'makeInvoice'])->name('check');
+Route::post('/testPayment', [OrderController::class, 'checkout'])->name('check');
 Route::get('/testPayment', function (){
     return view('test');
 });
