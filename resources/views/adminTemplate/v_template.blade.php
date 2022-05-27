@@ -74,5 +74,26 @@
       })
   })
 </script>
+
+<script>
+  $(document).ready(function() {
+      $('.editBtnMenu').on('click', function(){
+          $('#formEditMenu').modal('show');
+
+          $tr = $(this).closest('tr');
+
+          var data = $tr.children("td").map(function () {
+              return $(this).text();
+          }).get();
+
+          console.log(data);
+
+          $('#fid').val(data[0]);
+          $('#fnamaMenu').val(data[1]);
+          $('#fharga').val(data[2]);
+          $('#fstok').val(data[3]);
+      })
+  })
+</script>
 </body>
 </html>

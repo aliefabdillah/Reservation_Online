@@ -33,18 +33,18 @@ class SeatController extends Controller
                 // return view('menu', compact("makanan", "minuman", "waktu", "tempatDuduk"));
             }
             else {
-                return redirect()->route('tmptDuduk')->with('alert','Kode Tempat Duduk Salah!');
+                return redirect()->route('tmptDuduk')->with('validate','Kode Tempat Duduk Salah!');
             }
         }
         else {
             if (empty($request->waktu) && empty($request->tempatDuduk)) {
-                return redirect()->route('tmptDuduk')->with('alert','Waktu Kedatangan atau Tempat Duduk Tidak Boleh Kosong!');
+                return redirect()->route('tmptDuduk')->with('validate','Waktu Kedatangan atau Tempat Duduk Tidak Boleh Kosong!');
             }
             elseif (empty($request->waktu)) {
-                return redirect()->route('tmptDuduk')->with('alert','Waktu Kedatangan Tidak Boleh Kosong!');
+                return redirect()->route('tmptDuduk')->with('validate','Waktu Kedatangan Tidak Boleh Kosong!');
             }
             elseif (empty($request->tempatDuduk)) {
-                return redirect()->route('tmptDuduk')->with('alert','Tempat Duduk Tidak Boleh Kosong!');
+                return redirect()->route('tmptDuduk')->with('validate','Tempat Duduk Tidak Boleh Kosong!');
             }
         }
 
