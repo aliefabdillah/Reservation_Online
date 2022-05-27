@@ -47,7 +47,7 @@
                     <div class="container-md p-4 my-3 border">
                         <div class="row">
                             <p>Kode Tempat Duduk</p>  
-                            <input class="form-control" type="text" id="updateIdSeat" name="updateIdSeat" readonly>
+                            <input class="form-control" type="text" id="updateIdSeat" name="updateIdSeat" hidden>
                             <input class="form-control" type="text" id="updateKodeSeat" name="updateKodeSeat">
                         </div>
                     </div>

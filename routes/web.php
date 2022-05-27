@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AdminSeatController;
+use App\Http\Controllers\AdminMenuController;
+use App\Http\Controllers\AdminOrderController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SeatController;
 use App\Http\Controllers\Controller;
@@ -26,7 +29,7 @@ Route::get('/testPayment', function (){
 });
 Route::get('/{transaction}', [TransactionDetailController::class, 'show']);
 
-/* USER */
+/*=========== USER START =============*/
 // NAVBAR BUTTON logout
 Route::get('/user/logout', [CustomerController::class,'customerLogout'])->name('customerLogout');           //route logout pada navbar customer dan akan meredirect ke form login
 
@@ -60,9 +63,11 @@ Route::post('/user/invoice', [Controller::class,'invoice'])->name('invoice');   
 Route::get('/user/validation', [Controller::class,'validationSucces'])->name('validation');                 //tampil validation succes
 
 Route::get('/user/validation', [Controller::class,'validationFailed'])->name('validation');                 //tampil validation failed
-
+/*=========== USER END =============*/
 
 /* ADMIN */
+
+/* ============ ADMIN LOGIN START ================== */
 // Login Page
 Route::get('/admin/signIn', [AdminController::class,'adminSignIn'])->name('adminSignIn');                   //route menampilkan form sign in untuk admin
 
@@ -71,27 +76,33 @@ Route::post('/admin/signIn', [AdminController::class,'adminSignInPost'])->name('
 
 // Logout dari tampilan admin
 Route::get('/admin/logout', [AdminController::class,'adminLogout'])->name('adminLogout');
+/* ============ ADMIN LOGIN END ================== */
+
 
 // Menampilkan tabel Reservasi
-Route::get('/admin/daftarOrder', [AdminController::class,'showOrder'])->name('showOrder');                                                  //route menampilkan Tabel Daftar Reservasi
+Route::get('/admin/daftarOrder', [AdminOrderController::class,'showOrder'])->name('showOrder');                                                  //route menampilkan Tabel Daftar Reservasi
 
+
+/* ============= ADMIN SEAT START =================== */
 // Menampilkan tabel Tempat duduk
-Route::get('/admin/daftarTempatDuduk', [AdminController::class,'showTmptDuduk'])->name('showTmptDuduk');                                    //route menampilkan Tabel Tempat Duduk untuk Admin
+Route::get('/admin/daftarTempatDuduk', [AdminSeatController::class,'showTmptDuduk'])->name('showTmptDuduk');                                    //route menampilkan Tabel Tempat Duduk untuk Admin
 
 // Fitur Pencarian Pada View Tempat Duduk
-Route::get('/admin/daftarTempatDuduk/cari', [AdminController::class,'searchSeat'])->name('searchSeat');                                    //route menampilkan Tabel Tempat Duduk untuk Admin
+Route::get('/admin/daftarTempatDuduk/cari', [AdminSeatController::class,'searchSeat'])->name('searchSeat');                                    //route menampilkan Tabel Tempat Duduk untuk Admin
 
 // CRUD SEAT
-Route::post('/admin/daftarTempatDuduk', [AdminController::class,'storeSeat'])->name('addSeat');                                             //route menambahkan data tempat duduk baru ke database
+Route::post('/admin/daftarTempatDuduk', [AdminSeatController::class,'storeSeat'])->name('addSeat');                                             //route menambahkan data tempat duduk baru ke database
 
-Route::put('/admin/daftarTempatDuduk/{seatId}', [AdminController::class,'updateStatusSeat'])->name('updateStatusSeat');                   //route menambahkan data tempat duduk baru ke database
+Route::put('/admin/daftarTempatDuduk/{seatId}', [AdminSeatController::class,'updateStatusSeat'])->name('updateStatusSeat');                   //route menambahkan data tempat duduk baru ke database
 
-Route::put('/admin/daftarTempatDuduk', [AdminController::class,'editSeat'])->name('editSeat');                             //route edit data seat
+Route::put('/admin/daftarTempatDuduk', [AdminSeatController::class,'editSeat'])->name('editSeat');                             //route edit data seat
 
-Route::delete('/admin/daftarTempatDuduk/{seatId}', [AdminController::class,'deleteSeat'])->name('deleteSeat');                   //route menghapus data seat dari database
+Route::delete('/admin/daftarTempatDuduk/{seatId}', [AdminSeatController::class,'deleteSeat'])->name('deleteSeat');                   //route menghapus data seat dari database
+/* ============= ADMIN SEAT END =================== */
+
 
 // Menampilkan tabel Makanan
-Route::get('/admin/makanan', [AdminController::class,'showMakanan'])->name('showMakanan');                      //route menampilkan tabel makanan 
+Route::get('/admin/makanan', [AdminMenuController::class,'showMakanan'])->name('showMakanan');                      //route menampilkan tabel makanan 
 
 // Menampilkan tabel Minuman
-Route::get('/admin/minuman', [AdminController::class,'showMinuman'])->name('showMinuman');                      //route menampilkan tabel minuman
+Route::get('/admin/minuman', [AdminMenuController::class,'showMinuman'])->name('showMinuman');                      //route menampilkan tabel minuman
