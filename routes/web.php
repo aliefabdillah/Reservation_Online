@@ -80,6 +80,7 @@ Route::get('/admin/logout', [AdminController::class,'adminLogout'])->name('admin
 
 // Menampilkan tabel Reservasi
 Route::get('/admin/daftarOrder', [AdminOrderController::class,'showOrder'])->name('showOrder');                                                  //route menampilkan Tabel Daftar Reservasi
+Route::delete('/admin/daftarOrder/{orderId}', [AdminOrderController::class,'deleteOrder'])->name('deleteOrder');                   //route menghapus data seat dari database
 
 
 /* ============= ADMIN SEAT START =================== */

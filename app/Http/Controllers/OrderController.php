@@ -45,6 +45,11 @@ class OrderController extends Controller
         $order->total_harga = $total_harga_menu + 5000;
         $order->save();
 
+        $data_menu = OrderMenu::all();
+        foreach($data_menu as $order_menu){
+            Menu::where('id', $order_menu->menu_id)->decrement('stok', $order_menu->jumlah_pesan);
+        }
+
         $transaction = new Transaction([
             'order_id' => $order->id,
         ]);
