@@ -29,9 +29,9 @@
             <label>Untuk Memilih Tempat Duduk Anda Perlu Login? <a href="{{ route('signIn') }}">Login Sekarang!</a></label>
         @endif
     </form>
-    @if(\Session::has('alert'))
+    @if(\Session::has('validate'))
         <div class="alert alert-danger">
-            <div>{{Session::get('alert')}}</div>
+            <div>{{Session::get('validate')}}</div>
         </div>
     @endif
 </body>

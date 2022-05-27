@@ -11,7 +11,7 @@ class AdminOrderController extends Controller
 {
     public function __construct()
     {
-        if (!Session::get('login')) {
+        if (!Session::get('adminLogin')) {
             return redirect()->route('adminSignIn')->with('alert', 'Anda Harus Login Terlebih Dahulu!');
         }
     }
@@ -19,7 +19,7 @@ class AdminOrderController extends Controller
     // menampilkan tabel daftar orderan
         public function showOrder()
         {
-            if (!Session::get('login')) {
+            if (!Session::get('adminLogin')) {
                 return redirect()->route('adminSignIn')->with('alert', 'Anda Harus Login!');
             }
             else {

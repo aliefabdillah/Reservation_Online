@@ -12,7 +12,7 @@ class AdminSeatController extends Controller
 {
     public function __construct()
     {
-        if (!Session::get('login')) {
+        if (!Session::get('adminLogin')) {
             return redirect()->route('adminSignIn')->with('alert', 'Anda Harus Login Terlebih Dahulu!');
         }
     }
@@ -20,7 +20,7 @@ class AdminSeatController extends Controller
     // menampilkan tabel tempat duduk
     public function showTmptDuduk()
     {
-        if (!Session::get('login')) {
+        if (!Session::get('adminLogin')) {
             return redirect()->route('adminSignIn')->with('alert', 'Anda Harus Login!');
         }
         else {
