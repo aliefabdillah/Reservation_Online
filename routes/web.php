@@ -23,11 +23,13 @@ use App\Http\Controllers\OrderController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::post('/testPayment', [OrderController::class, 'makeInvoice'])->name('check');
+Route::post('/testPayment', [OrderController::class, 'checkout'])->name('check');
 Route::get('/testPayment', function (){
     return view('test');
 });
 Route::get('/{transaction}', [TransactionDetailController::class, 'show']);
+Route::post('/utils/midtrans', [OrderController::class, 'midtransNotification']);
+
 
 /*=========== USER START =============*/
 // NAVBAR BUTTON logout
@@ -52,7 +54,7 @@ Route::post('/user/tempatDuduk', [SeatController::class,'submitTmptDuduk'])->nam
 Route::get('/user/menu', [MenuController::class,'menu'])->name('menu');                                     //route menampilkan view menu
 Route::post('/user/menu', [MenuController::class,'submitMenu'])->name('submit.menu');                       //route ketika menekan tombol checkout pada menu
 
-// tampilkan view invoice 
+// tampilkan view invoice
 Route::post('/user/invoice', [Controller::class,'invoice'])->name('invoice');                               //submit/checkout form menu dan menampilkan invoice
 
 // Validation
@@ -97,7 +99,7 @@ Route::delete('/admin/daftarTempatDuduk/{seatId}', [AdminSeatController::class,'
 
 /* ============= ADMIN MENU START ==================*/
 // Menampilkan tabel Makanan
-Route::get('/admin/makanan', [AdminMenuController::class,'showMakanan'])->name('showMakanan');                      //route menampilkan tabel makanan 
+Route::get('/admin/makanan', [AdminMenuController::class,'showMakanan'])->name('showMakanan');                      //route menampilkan tabel makanan
 
 // Menampilkan tabel Minuman
 Route::get('/admin/minuman', [AdminMenuController::class,'showMinuman'])->name('showMinuman');                      //route menampilkan tabel minuman

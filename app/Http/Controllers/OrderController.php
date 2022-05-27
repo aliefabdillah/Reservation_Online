@@ -11,14 +11,15 @@ use App\Services\InvoiceService;
 use App\Services\Midtrans\CreateSnapTokenService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Session;
 
 class OrderController extends Controller
 {
     //
-    public function makeInvoice(Request $request){
+    public function checkout(Request $request){
         $order = Order::create([
-            'waktu_reservasi' => date('Y-m-d H:i:s'),
+            'waktu_reservasi' => Carbon::createFromFormat("H:i", $request->waktu),
             'customer_id' => Session::get("id"),
             'seat_id' => $request->seat_id
         ]);
@@ -64,5 +65,18 @@ class OrderController extends Controller
         $details->save();
 
         return view('testPayment', compact('order', 'details', 'transaction', 'snapToken'));
+    }
+
+    public function midtransNotification(Request $request){
+        $tr = TransactionDetail::where("number", $request->order_id)->first();
+        if($request->transaction_status == "settlement" || $request->transaction_status == "capture"){
+            $tr->payment_status = 2;
+        }else{
+            $tr->payment_status = 3;
+        }
+        $tr->save();
+        return response()->json([
+            'status'    => 200
+        ],200);
     }
 }
