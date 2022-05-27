@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Menu;
 use App\Models\Order;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -19,6 +20,7 @@ class CreateOrderMenusTable extends Migration
             $table->integer('jumlah_pesan');
             $table->bigInteger('total_harga');
             $table->foreignIdFor(Order::class);
+            $table->foreignIdFor(Menu::class);
             $table->timestamps();
         });
     }

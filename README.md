@@ -2,6 +2,10 @@
 
 ## WEB USER
 ==========
+### NAVBAR
+  - Button Dropdown Profile :
+    -Logout ==> signIn.blade (userLogout);
+    
 ### 1. landing.blade.
    -Pesan Sekarang ==> formTmptDuduk.blade (tmptDuduk)
 

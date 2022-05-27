@@ -17,9 +17,10 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->timestamp('waktu_reservasi');
+            $table->timestamp('waktu_reservasi')->nullable();
             // $table->integer('diskon');
-            $table->bigInteger('total_harga');
+            $table->bigInteger('total_harga')->nullable();
+            $table->enum('order_status', ['1', '2', '3', '4'])->comment('1=pending, 2=selesai, 3=dibatalkan, 4=tidak_datang')->nullable();
             $table->foreignIdFor(Customer::class);
             $table->foreignIdFor(Seat::class);
             $table->timestamps();

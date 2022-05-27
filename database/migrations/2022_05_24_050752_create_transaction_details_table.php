@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Transaction;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -18,10 +19,11 @@ class CreateTransactionDetailsTable extends Migration
             $table->timestamp("ts_dibayar")->nullable();
             $table->enum('jenis_pembayaran', ['dp', 'sisa']);
             $table->bigInteger('sisa');
-            $table->string('number', 16)->nullable();
+            $table->string('number', 16)->nullable()->unique();
             $table->bigInteger('total_price');
-            $table->enum('payment_status', ['1', '2', '3'])->comment('1=pending 2=success, 3=expired')->nullable();
+            $table->enum('payment_status', ['1', '2', '3'])->comment('1=pending 2=success, 3=failed')->nullable();
             $table->string('snap_token', 36)->nullable();
+            $table->foreignIdFor(Transaction::class);
             $table->timestamps();
         });
     }

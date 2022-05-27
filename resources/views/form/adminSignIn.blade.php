@@ -39,11 +39,6 @@
             <div>{{Session::get('alert')}}</div>
         </div>
       @endif
-      @if(\Session::has('alert-success'))
-        <div class="alert alert-danger">
-            <div>{{Session::get('alert-success')}}</div>
-        </div>
-      @endif
       <form action="{{ route('adminSignIn') }}" method="post">
         @csrf
         <div class="mb-3">
