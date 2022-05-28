@@ -23,6 +23,7 @@ class OrderController extends Controller
         }
         $order = Order::create([
             'waktu_reservasi' => Carbon::createFromFormat("H:i", $request->waktu),
+            "order_status" => '1',
             'customer_id' => Session::get("id"),
             'seat_id' => $request->seat_id
         ]);

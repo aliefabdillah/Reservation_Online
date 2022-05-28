@@ -49,11 +49,22 @@ class AdminOrderController extends Controller
     // hapus data seat dari db
     public function changeStatusOrder(Request $request)
     {
+        // ganti status orderan
         $data_order = Order::find($request->idOrder);
         $data_order->order_status = $request->status;
-        // print_r($request->idOrder);
         $data_order->save();
-        return redirect()->route('showOrder')->with('pesan',"Update Status Order berhasil");
+
+        // jika status orderan di batalkan atau tidak ada
+        if ($request->status == 3 || $request->status == 4) {
+            $data_orderMenu = OrderMenu::all()->where('order_id', $request->idOrder);
+            foreach($data_orderMenu as $orderMenu){
+                $data_menu = Menu::where('id', $orderMenu->menu_id);
+                $data_menu->increment('stok', $orderMenu->jumlah_pesan);
+                echo $data_menu;
+                // OrderMenu::destroy($request->idOrder);
+            }
+        }
+        // return redirect()->route('showOrder')->with('pesan',"Update Status Order berhasil");
     }
 
     // hapus data seat dari db
