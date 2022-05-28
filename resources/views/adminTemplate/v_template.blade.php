@@ -95,5 +95,42 @@
       })
   })
 </script>
+
+<script>
+  $(document).ready(function() {
+      $('.editStatusBtn').on('click', function(){
+          $('#editStatusOrder').modal('show');
+
+          $tr = $(this).closest('tr');
+
+          var data = $tr.children("td").map(function () {
+              return $(this).text();
+          }).get();
+
+          console.log(data);
+
+          $('#idOrder').val(data[0]);
+      })
+  })
+</script>
+
+<script>
+$('body').on('click', '.detailBtn', function (event) {
+    event.preventDefault();
+
+    var me = $(this),
+        url = me.attr('href');
+
+    $.ajax({
+        url: url,
+        dataType: 'html',
+        success: function (response) {
+            $('#detail_order').html(response);
+        }
+    });
+
+    $('#detailOrder').modal('show');
+});
+</script>
 </body>
 </html>

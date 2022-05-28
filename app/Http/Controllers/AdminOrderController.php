@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Customer;
 use App\Models\Order;
 use App\Models\OrderMenu;
+use App\Models\Menu;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
@@ -28,7 +29,9 @@ class AdminOrderController extends Controller
             // redirect ke view tabel tempat duduk
             $data_orders = Order::join('customers', 'customers.id', '=', 'orders.customer_id')
                             ->join('seats', 'seats.id', '=', 'orders.seat_id')
-                            ->get(['orders.*', 'customers.nama', 'customers.telp', 'seats.nama AS kode_seat']);
+                            ->join('transactions', 'transactions.order_id', '=', 'orders.id')
+                            ->leftJoin('transaction_details', 'transaction_details.transaction_id', '=', 'transactions.id')
+                            ->get(['orders.*', 'customers.nama', 'seats.nama AS kode_seat', 'transaction_details.sisa', 'transaction_details.payment_status']);
             return view('admin.tabelOrder', ['data_orders' => $data_orders]);
         }
     }
@@ -44,10 +47,23 @@ class AdminOrderController extends Controller
     }
 
     // hapus data seat dari db
-    public function deleteOrder($id)
+    public function changeStatusOrder(Request $request)
     {
-        Order::destroy($id);
-        OrderMenu::where('order_id',$id)->delete();
-        return redirect()->route('showOrder')->with('pesan',"Menghapus Dafter Order berhasil");
+        $data_order = Order::find($request->idOrder);
+        $data_order->order_status = $request->status;
+        // print_r($request->idOrder);
+        $data_order->save();
+        return redirect()->route('showOrder')->with('pesan',"Update Status Order berhasil");
+    }
+
+    // hapus data seat dari db
+    public function detailOrder($id)
+    {
+        $detailOrders = OrderMenu::where('order_menus.order_id', $id)
+            ->join('menus', 'menus.id', '=', 'order_menus.menu_id')
+            ->get(['order_menus.*', 'menus.nama', 'menus.harga']);
+        // $res = compact('detailOrders');
+        // print_r($res);
+        return view('admin.detailOrderModal', ['detail_orders' => $detailOrders]);
     }
 }

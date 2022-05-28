@@ -84,7 +84,8 @@ Route::get('/admin/logout', [AdminController::class,'adminLogout'])->name('admin
 // Menampilkan tabel Reservasi
 Route::get('/admin/daftarOrder', [AdminOrderController::class,'showOrder'])->name('showOrder');                                                  //route menampilkan Tabel Daftar Reservasi
 Route::get('/admin/daftarOrder/cari', [AdminOrderController::class,'searchOrder'])->name('searchOrder');                                    //route menampilkan Tabel Tempat Duduk untuk Admin
-Route::delete('/admin/daftarOrder/{orderId}', [AdminOrderController::class,'deleteOrder'])->name('deleteOrder');                   //route menghapus data seat dari database
+Route::get('/admin/daftarOrder/{orderId}', [AdminOrderController::class,'detailOrder'])->name('detailOrder');                   //route menghapus data seat dari database
+Route::put('/admin/daftarOrder/updStatus', [AdminOrderController::class,'changeStatusOrder'])->name('changeStatusOrder');                   //route menghapus data seat dari database
 
 
 /* ============= ADMIN SEAT START =================== */
