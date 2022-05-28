@@ -20,6 +20,14 @@
             <p>Waktu Operasional Restoran dari jam 10:00 - 22:00</p>
         </div>
         <div class="mb-3">
+            <label>List Tempat Duduk</label>
+            <ul>
+                @foreach ($seat as $s)
+                    <li>{{ $s->nama }}</li>
+                @endforeach
+            </ul>
+        </div>
+        <div class="mb-3">
             <label>Tempat:</label>
             <input type="text" name="tempatDuduk">
         </div>

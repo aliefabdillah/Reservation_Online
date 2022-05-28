@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>transaction #{{ $transaction->number }}</title>
+    <title>transaction #{{ $details->number }}</title>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
         integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
@@ -51,11 +51,11 @@
 <body>
 
     <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white btransaction-bottom box-shadow">
-        <h5 class="my-0 mr-md-auto font-weight-normal">Lvl Midtrans</h5>
+        <h5 class="my-0 mr-md-auto font-weight-normal"></h5>
         <nav class="my-2 my-md-0 mr-md-3">
-            <a class="p-2 text-dark" href="https://jurnalmms.web.id/">Blog</a>
-            <a class="p-2 text-dark" href="https://github.com/mulyosyahidin">GitHub</a>
-            <a class="p-2 text-dark" href="https://instagram.com/mul.yoo">Instagram</a>
+            <a class="p-2 text-dark" href="https://jurnalmms.web.id/"></a>
+            <a class="p-2 text-dark" href="https://github.com/mulyosyahidin"></a>
+            <a class="p-2 text-dark" href="https://instagram.com/mul.yoo"></a>
         </nav>
     </div>
 
@@ -84,14 +84,20 @@
                                         @elseif ($details->payment_status == 2)
                                             Sudah Dibayar
                                         @else
-                                            Kadaluarsa
+                                            Gagal
                                         @endif
                                     </b></td>
                             </tr>
                             <tr>
-                                <td>Tanggal</td>
-                                <td><b>{{ $transaction->updated_at->format('d M Y H:i') }}</b></td>
+                                <td>Tanggal Dibuat</td>
+                                <td><b>{{ $details->transaction->ts_dibuat->format('d M Y H:i') }}</b></td>
                             </tr>
+                            @if ($details->ts_dibayar)
+                            <tr>
+                                <td>Tanggal Dibayar</td>
+                                <td><b>{{ $details->ts_dibayar->format('d M Y H:i') }}</b></td>
+                            </tr>
+                            @endif
                         </table>
                     </div>
                 </div>
@@ -116,18 +122,18 @@
         payButton.addEventListener('click', function(e) {
             e.preventDefault();
 
-            snap.pay('{{ $snapToken }}', {
+            snap.pay('{{ $details->snap_token }}', {
                 // Optional
                 onSuccess: function(result) {
                     /* You may add your own js here, this is just example */
                     // document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
-                    window.location.replace("http://www.w3schools.com");
+                    window.location.replace('{{ route('validation') }}');
                 },
                 // Optional
                 onPending: function(result) {
                     /* You may add your own js here, this is just example */
                     // document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
-                    window.location.replace("http://www.w3schools.com");
+                    window.location.replace('{{ route('validation') }}');
                 },
                 // Optional
                 onError: function(result) {

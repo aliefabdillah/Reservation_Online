@@ -55,11 +55,14 @@ Route::get('/user/menu', [MenuController::class,'menu'])->name('menu');         
 Route::post('/user/menu', [MenuController::class,'submitMenu'])->name('submit.menu');                       //route ketika menekan tombol checkout pada menu
 
 // tampilkan view invoice
-Route::post('/user/invoice', [Controller::class,'invoice'])->name('invoice');                               //submit/checkout form menu dan menampilkan invoice
+Route::get('/user/invoice/{id}', [OrderController::class,'showInvoice'])->name('invoice');                               //submit/checkout form menu dan menampilkan invoice
 
 // Validation
-Route::get('/user/validation', [Controller::class,'validationSucces'])->name('validation');                 //tampil validation succes
-Route::get('/user/validation', [Controller::class,'validationFailed'])->name('validation');                 //tampil validation failed
+Route::get('/user/validation', function(){
+    return view("checkoutValidation");
+})->name('validation');
+                //tampil validation succes
+// Route::get('/user/validation', [Controller::class,'validationFailed'])->name('validation.failed');                 //tampil validation failed
 /*=========== USER END =============*/
 
 

@@ -18,6 +18,8 @@ class TransactionDetail extends Model
             'sisa'
     ];
 
+    protected $dates = ['ts_dibayar'];
+
     public function transaction(){
         return $this->belongsTo(Transaction::class);
     }

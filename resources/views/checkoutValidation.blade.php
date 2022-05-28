@@ -32,11 +32,11 @@
 			font-family: 'Montserrat', sans-serif;
 			font-weight: 500;
 		}
-		
+
 		button{
 			font-family: 'Montserrat', sans-serif;
 		}
-		
+
 		@media screen and (max-width: 800px) {
 			h1{
 				font-size: 45px;
@@ -69,8 +69,8 @@
 <body>
 	<div class="hero-text">
 		<h1>Pembayaran Berhasil</h1>
-		<p class="slogan mt-2">Jika pesanan tidak di konfirmasi di restoran 15 menit sebelum kedatangan maka pesanan hangus dan uang tidak dapat kembali !!!!</p>
-		<a href="{{ route('home.welcome') }}"><button type="button" class="btn btn-primary btn-lg">Kembali</button></a>
+		<p class="slogan mt-2">Jika pesanan belum di konfirmasi di restoran 15 menit setelah waktu reservasi maka pesanan hangus dan uang tidak dapat kembali !!!!</p>
+		<a href="{{ route('landing') }}"><button type="button" class="btn btn-primary btn-lg">Kembali</button></a>
 	</div>
 </body>
 </html>

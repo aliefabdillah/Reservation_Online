@@ -18,6 +18,9 @@ class OrderController extends Controller
 {
     //
     public function checkout(Request $request){
+        if(empty($request->menu)){
+            return redirect()->back()->with('validate','Kode Tempat Duduk Salah!');
+        }
         $order = Order::create([
             'waktu_reservasi' => Carbon::createFromFormat("H:i", $request->waktu),
             'customer_id' => Session::get("id"),
@@ -69,13 +72,19 @@ class OrderController extends Controller
         $details->snap_token = $snapToken;
         $details->save();
 
-        return view('testPayment', compact('order', 'details', 'transaction', 'snapToken'));
+        return redirect()->route('invoice', ['id'=>$details->id]);
+    }
+
+    public function showInvoice($id){
+        $details = TransactionDetail::with("transaction")->find($id);
+        return view('testPayment', compact('details'));
     }
 
     public function midtransNotification(Request $request){
         $tr = TransactionDetail::where("number", $request->order_id)->first();
         if($request->transaction_status == "settlement" || $request->transaction_status == "capture"){
             $tr->payment_status = 2;
+            $tr->ts_dibayar = Carbon::now();
         }else{
             $tr->payment_status = 3;
         }

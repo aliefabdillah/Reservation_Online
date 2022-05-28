@@ -12,7 +12,8 @@ class SeatController extends Controller
 {
     public function formTmptDuduk()
     {
-        return view('v_testSeat');
+        $seat = Seat::get();
+        return view('v_testSeat', compact('seat'));
     }
 
     public function submitTmptDuduk(Request $request)
