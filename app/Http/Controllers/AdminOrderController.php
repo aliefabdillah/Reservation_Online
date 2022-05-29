@@ -27,7 +27,7 @@ class AdminOrderController extends Controller
         }
         else {
             // redirect ke view tabel tempat duduk
-            $data_orders = Order::join('customers', 'customers.id', '=', 'orders.customer_id')
+            $data_orders = Order::orderBy('orders.waktu_reservasi','ASC')->join('customers', 'customers.id', '=', 'orders.customer_id')
                             ->join('seats', 'seats.id', '=', 'orders.seat_id')
                             ->join('transactions', 'transactions.order_id', '=', 'orders.id')
                             ->leftJoin('transaction_details', 'transaction_details.transaction_id', '=', 'transactions.id')
@@ -38,10 +38,12 @@ class AdminOrderController extends Controller
 
     public function searchOrder(Request $request)
     {
-        $result = Order::where('orders.id', 'like', "%{$request->search}%")
+        $result = Order::where('orders.id', 'like', "%{$request->search}%")->orderBy('orders.waktu_reservasi','ASC')
                         ->join('customers', 'customers.id', '=', 'orders.customer_id')
                         ->join('seats', 'seats.id', '=', 'orders.seat_id')
-                        ->get(['orders.*', 'customers.nama', 'customers.telp', 'seats.nama AS kode_seat']);
+                        ->join('transactions', 'transactions.order_id', '=', 'orders.id')
+                        ->leftJoin('transaction_details', 'transaction_details.transaction_id', '=', 'transactions.id')
+                        ->get(['orders.*', 'customers.nama', 'seats.nama AS kode_seat', 'transaction_details.sisa', 'transaction_details.payment_status']);
         
         return view('admin.tabelOrder', ['data_orders' => $result]);
     }
