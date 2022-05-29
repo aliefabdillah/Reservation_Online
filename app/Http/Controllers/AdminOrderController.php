@@ -60,11 +60,12 @@ class AdminOrderController extends Controller
             foreach($data_orderMenu as $orderMenu){
                 Menu::where('id', $orderMenu->menu_id)->increment('stok', $orderMenu->jumlah_pesan);
             }
-
-            $seat = Seat::find($data_order->seat_id);
-            $seat->is_available = 1;
-            $seat->save();
         }
+
+        $seat = Seat::find($data_order->seat_id);
+        $seat->is_available = 1;
+        $seat->save();
+        
         return redirect()->route('showOrder')->with('pesan',"Update Status Order berhasil");
     }
 

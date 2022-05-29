@@ -23,15 +23,22 @@ class SeatController extends Controller
             $waktu = $request->waktu;
             $nama_tempatDuduk = $request->tempatDuduk;
 
-            $tempatDuduk = Seat::select("id")->where('nama',$nama_tempatDuduk)->first()->id;
-            if ($tempatDuduk) {
-                # data menu nya
-                $makanan = Menu::where('jenis', 'makanan')->get();
-                $minuman = Menu::where('jenis', 'minuman')->get();
-
-                // menampilkan view menu
-                return view('testMenu', compact("makanan", "minuman", "waktu", "tempatDuduk"));
-                // return view('menu', compact("makanan", "minuman", "waktu", "tempatDuduk"));
+            $seat_check = Seat::where('nama',$nama_tempatDuduk)->first();
+            // $tempatDuduk = Seat::select("id")->where('nama',$nama_tempatDuduk)->first()->id;
+            if ($seat_check) {
+                if ($seat_check->is_available == 1) {
+                    $tempatDuduk = Seat::select("id")->where('nama',$nama_tempatDuduk)->first()->id;
+                    # data menu nya
+                    $makanan = Menu::where('jenis', 'makanan')->get();
+                    $minuman = Menu::where('jenis', 'minuman')->get();
+    
+                    // menampilkan view menu
+                    return view('testMenu', compact("makanan", "minuman", "waktu", "tempatDuduk"));
+                    // return view('menu', compact("makanan", "minuman", "waktu", "tempatDuduk"));
+                }
+                else {
+                    return redirect()->route('tmptDuduk')->with('validate','Tempat Duduk Telah Dipesan!');
+                }
             }
             else {
                 return redirect()->route('tmptDuduk')->with('validate','Kode Tempat Duduk Salah!');
