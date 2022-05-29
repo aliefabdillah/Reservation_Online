@@ -6,7 +6,7 @@
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Detail Order</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Detail Pesanan</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body" id="detail_order">
@@ -21,7 +21,7 @@
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Form Insert Data</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Edit Status Order</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -99,7 +99,7 @@
                         <th>Waktu Reservasi</th>
                         <th>Nama</th>
                         <th>Seat</th>
-                        <th>Total Harga</th>
+                        <th>Total Bayar</th>
                         <th>Sisa Dibayar</th>
                         <th>Payment Status</th>
                         <th>Status Order</th>
