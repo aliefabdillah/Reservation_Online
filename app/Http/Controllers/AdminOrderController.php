@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Customer;
+use App\Models\Seat;
 use App\Models\Order;
 use App\Models\OrderMenu;
 use App\Models\Menu;
@@ -56,15 +56,16 @@ class AdminOrderController extends Controller
 
         // jika status orderan di batalkan atau tidak ada
         if ($request->status == 3 || $request->status == 4) {
-            $data_orderMenu = OrderMenu::all()->where('order_id', $request->idOrder);
+            $data_orderMenu = OrderMenu::where('order_id', $request->idOrder)->get();
             foreach($data_orderMenu as $orderMenu){
-                $data_menu = Menu::where('id', $orderMenu->menu_id);
-                $data_menu->increment('stok', $orderMenu->jumlah_pesan);
-                echo $data_menu;
-                // OrderMenu::destroy($request->idOrder);
+                Menu::where('id', $orderMenu->menu_id)->increment('stok', $orderMenu->jumlah_pesan);
             }
+
+            $seat = Seat::find($data_order->seat_id);
+            $seat->is_available = 1;
+            $seat->save();
         }
-        // return redirect()->route('showOrder')->with('pesan',"Update Status Order berhasil");
+        return redirect()->route('showOrder')->with('pesan',"Update Status Order berhasil");
     }
 
     // hapus data seat dari db
