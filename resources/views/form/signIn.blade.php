@@ -38,6 +38,10 @@
         <div class="alert alert-success">
             <div>{{Session::get('alert-success')}}</div>
         </div>
+      @elseif(\Session::has('alert'))
+        <div class="alert alert-danger">
+            <div>{{Session::get('alert')}}</div>
+        </div>
       @endif
       <form action="{{ route('submit.signIn') }}" method="post">
         @csrf
