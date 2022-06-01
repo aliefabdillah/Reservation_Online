@@ -127,19 +127,21 @@
                 onSuccess: function(result) {
                     /* You may add your own js here, this is just example */
                     // document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
-                    window.location.replace('{{ route('validation') }}');
+                    window.location.replace("{{ route('validation', ['status' => 2]) }}");
                 },
                 // Optional
                 onPending: function(result) {
                     /* You may add your own js here, this is just example */
                     // document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
-                    window.location.replace('{{ route('validation') }}');
+                    window.location.replace("{{ route('validation', ['status' => 2]) }}");
+                    // console.log(result)
                 },
                 // Optional
                 onError: function(result) {
                     /* You may add your own js here, this is just example */
                     // document.getElementById('result-json').innerHTML += JSON.stringify(result, null, 2);
-                    console.log(result)
+                    // console.log(result)
+                    window.location.replace("{{ route('validation', ['status' => 3]) }}");
                 }
             });
         });

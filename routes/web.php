@@ -9,9 +9,11 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SeatController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\TransactionDetailController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\OrderController;
+use App\Models\Transaction;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,10 +60,8 @@ Route::post('/user/menu', [MenuController::class,'submitMenu'])->name('submit.me
 Route::get('/user/invoice/{id}', [OrderController::class,'showInvoice'])->name('invoice');                               //submit/checkout form menu dan menampilkan invoice
 
 // Validation
-Route::get('/user/validation', function(){
-    return view("checkoutValidation");
-})->name('validation');
-                //tampil validation succes
+Route::get('/user/validation/{status}', [TransactionController::class, 'validationStatus'])->name('validation');
+//tampil validation succes
 // Route::get('/user/validation', [Controller::class,'validationFailed'])->name('validation.failed');                 //tampil validation failed
 /*=========== USER END =============*/
 

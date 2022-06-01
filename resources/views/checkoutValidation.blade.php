@@ -67,10 +67,17 @@
 	</style>
 </head>
 <body>
+	@if($status == 2)
 	<div class="hero-text">
 		<h1>Pembayaran Berhasil</h1>
 		<p class="slogan mt-2">Jika pesanan belum di konfirmasi di restoran 15 menit setelah waktu reservasi maka pesanan hangus dan uang tidak dapat kembali !!!!</p>
 		<a href="{{ route('landing') }}"><button type="button" class="btn btn-primary btn-lg">Kembali</button></a>
 	</div>
+	@else
+	<div class="hero-text">
+		<h1>Pembayaran Gagal</h1>
+		<p class="slogan mt-2">Terjadi Kesalahan dalam proses pembayaran. Silahkan ulangi proses pembayaran!</p>
+	</div>
+	@endif
 </body>
 </html>
