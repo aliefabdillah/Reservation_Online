@@ -6,7 +6,7 @@
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Form Insert Data</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Tambah Data Minuman</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -42,7 +42,7 @@
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Form Insert Data</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Edit Data Minuman</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -50,7 +50,7 @@
                     @csrf
                     @method('PUT')
                     <div class="container-md p-4 my-3 border">
-                        <input class="form-control" type="text" name="id" id="fid">
+                        <input class="form-control" type="text" name="id" id="fid" hidden>
                         <div class="row mb-3">
                             <label>Nama Makanan</label>  
                             <input class="form-control" type="text" name="namaMenu" id="fnamaMenu">

@@ -12,7 +12,8 @@ class SeatController extends Controller
 {
     public function formTmptDuduk()
     {
-        return view('v_testSeat');
+        $seat = Seat::get();
+        return view('v_testSeat', compact('seat'));
     }
 
     public function submitTmptDuduk(Request $request)
@@ -22,29 +23,36 @@ class SeatController extends Controller
             $waktu = $request->waktu;
             $nama_tempatDuduk = $request->tempatDuduk;
 
-            $tempatDuduk = Seat::select("id")->where('nama',$nama_tempatDuduk)->first()->id;
-            if ($tempatDuduk) {
-                # data menu nya
-                $makanan = Menu::where('jenis', 'makanan')->get();
-                $minuman = Menu::where('jenis', 'minuman')->get();
-
-                // menampilkan view menu
-                return view('testMenu', compact("makanan", "minuman", "waktu", "tempatDuduk"));
-                // return view('menu', compact("makanan", "minuman", "waktu", "tempatDuduk"));
+            $seat_check = Seat::where('nama',$nama_tempatDuduk)->first();
+            // $tempatDuduk = Seat::select("id")->where('nama',$nama_tempatDuduk)->first()->id;
+            if ($seat_check) {
+                if ($seat_check->is_available == 1) {
+                    $tempatDuduk = Seat::select("id")->where('nama',$nama_tempatDuduk)->first()->id;
+                    # data menu nya
+                    $makanan = Menu::where('jenis', 'makanan')->get();
+                    $minuman = Menu::where('jenis', 'minuman')->get();
+    
+                    // menampilkan view menu
+                    return view('testMenu', compact("makanan", "minuman", "waktu", "tempatDuduk"));
+                    // return view('menu', compact("makanan", "minuman", "waktu", "tempatDuduk"));
+                }
+                else {
+                    return redirect()->route('tmptDuduk')->with('validate','Tempat Duduk Telah Dipesan!');
+                }
             }
             else {
-                return redirect()->route('tmptDuduk')->with('alert','Kode Tempat Duduk Salah!');
+                return redirect()->route('tmptDuduk')->with('validate','Kode Tempat Duduk Salah!');
             }
         }
         else {
             if (empty($request->waktu) && empty($request->tempatDuduk)) {
-                return redirect()->route('tmptDuduk')->with('alert','Waktu Kedatangan atau Tempat Duduk Tidak Boleh Kosong!');
+                return redirect()->route('tmptDuduk')->with('validate','Waktu Kedatangan atau Tempat Duduk Tidak Boleh Kosong!');
             }
             elseif (empty($request->waktu)) {
-                return redirect()->route('tmptDuduk')->with('alert','Waktu Kedatangan Tidak Boleh Kosong!');
+                return redirect()->route('tmptDuduk')->with('validate','Waktu Kedatangan Tidak Boleh Kosong!');
             }
             elseif (empty($request->tempatDuduk)) {
-                return redirect()->route('tmptDuduk')->with('alert','Tempat Duduk Tidak Boleh Kosong!');
+                return redirect()->route('tmptDuduk')->with('validate','Tempat Duduk Tidak Boleh Kosong!');
             }
         }
 

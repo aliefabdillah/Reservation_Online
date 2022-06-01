@@ -34,14 +34,13 @@
   <div class="container shadow pt-4 pb-5 px-5 rounded bg-white" style="max-width:500px">
     <div class="wrapper">
       <h1 class="text-center mb-4">Login</h1>
-      @if(\Session::has('alert'))
-        <div class="alert alert-danger">
-            <div>{{Session::get('alert')}}</div>
-        </div>
-      @endif
       @if(\Session::has('alert-success'))
         <div class="alert alert-success">
             <div>{{Session::get('alert-success')}}</div>
+        </div>
+      @elseif(\Session::has('alert'))
+        <div class="alert alert-danger">
+            <div>{{Session::get('alert')}}</div>
         </div>
       @endif
       <form action="{{ route('submit.signIn') }}" method="post">

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Menu;
+use App\Models\Seat;
 use App\Models\Order;
 use App\Models\OrderMenu;
 use App\Models\Transaction;
@@ -18,12 +19,21 @@ class OrderController extends Controller
 {
     //
     public function checkout(Request $request){
+        if(empty($request->menu)){
+            return redirect()->back()->with('validate','Kode Tempat Duduk Salah!');
+        }
         $order = Order::create([
             'waktu_reservasi' => Carbon::createFromFormat("H:i", $request->waktu),
+            'order_status' => 0,
             'customer_id' => Session::get("id"),
             'seat_id' => $request->seat_id
         ]);
+        $order->order_status = 1;
         $order->save();
+
+        $seat = Seat::find($order->seat_id);
+        $seat->is_available = 0;
+        $seat->save();
 
         $qty = $request->qty;
         $total_harga_menu = 0;
@@ -45,6 +55,12 @@ class OrderController extends Controller
         $order->total_harga = $total_harga_menu + 5000;
         $order->save();
 
+        /* Mengurangi Stok Menu yang dipesan */
+        $data_menu = OrderMenu::where('order_id', $order->id)->get();
+        foreach($data_menu as $orderMenu){
+            Menu::where('id', $orderMenu->menu_id)->decrement('stok', $orderMenu->jumlah_pesan);
+        }
+
         $transaction = new Transaction([
             'order_id' => $order->id,
         ]);
@@ -64,13 +80,19 @@ class OrderController extends Controller
         $details->snap_token = $snapToken;
         $details->save();
 
-        return view('testPayment', compact('order', 'details', 'transaction', 'snapToken'));
+        return redirect()->route('invoice', ['id'=>$details->id]);
+    }
+
+    public function showInvoice($id){
+        $details = TransactionDetail::with("transaction")->find($id);
+        return view('testPayment', compact('details'));
     }
 
     public function midtransNotification(Request $request){
         $tr = TransactionDetail::where("number", $request->order_id)->first();
         if($request->transaction_status == "settlement" || $request->transaction_status == "capture"){
             $tr->payment_status = 2;
+            $tr->ts_dibayar = Carbon::now();
         }else{
             $tr->payment_status = 3;
         }

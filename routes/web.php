@@ -9,9 +9,11 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\SeatController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\TransactionDetailController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\OrderController;
+use App\Models\Transaction;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,11 +57,12 @@ Route::get('/user/menu', [MenuController::class,'menu'])->name('menu');         
 Route::post('/user/menu', [MenuController::class,'submitMenu'])->name('submit.menu');                       //route ketika menekan tombol checkout pada menu
 
 // tampilkan view invoice
-Route::post('/user/invoice', [Controller::class,'invoice'])->name('invoice');                               //submit/checkout form menu dan menampilkan invoice
+Route::get('/user/invoice/{id}', [OrderController::class,'showInvoice'])->name('invoice');                               //submit/checkout form menu dan menampilkan invoice
 
 // Validation
-Route::get('/user/validation', [Controller::class,'validationSucces'])->name('validation');                 //tampil validation succes
-Route::get('/user/validation', [Controller::class,'validationFailed'])->name('validation');                 //tampil validation failed
+Route::get('/user/validation/{status}', [TransactionController::class, 'validationStatus'])->name('validation');
+//tampil validation succes
+// Route::get('/user/validation', [Controller::class,'validationFailed'])->name('validation.failed');                 //tampil validation failed
 /*=========== USER END =============*/
 
 
@@ -80,6 +83,9 @@ Route::get('/admin/logout', [AdminController::class,'adminLogout'])->name('admin
 
 // Menampilkan tabel Reservasi
 Route::get('/admin/daftarOrder', [AdminOrderController::class,'showOrder'])->name('showOrder');                                                  //route menampilkan Tabel Daftar Reservasi
+Route::get('/admin/daftarOrder/cari', [AdminOrderController::class,'searchOrder'])->name('searchOrder');                                    //route menampilkan Tabel Tempat Duduk untuk Admin
+Route::get('/admin/daftarOrder/{orderId}', [AdminOrderController::class,'detailOrder'])->name('detailOrder');                   //route menghapus data seat dari database
+Route::put('/admin/daftarOrder/updStatus', [AdminOrderController::class,'changeStatusOrder'])->name('changeStatusOrder');                   //route menghapus data seat dari database
 
 
 /* ============= ADMIN SEAT START =================== */
