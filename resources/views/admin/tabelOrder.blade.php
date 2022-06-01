@@ -34,9 +34,10 @@
                             <input class="form-control" type="text" id="idOrder" name="idOrder" hidden>
                             <select class="form-select" name="status" aria-label="Default select example">
                                 <option selected hidden>Pilih Status...</option>
-                                <option value=2>Selesai</option>
-                                <option value=3>Batal</option>
-                                <option value=4>Tidak Datang</option>
+                                <option value=2>Datang</option>
+                                <option value=3>Selesai</option>
+                                <option value=4>Batal</option>
+                                <option value=5>Tidak Datang</option>
                             </select>
                         </div>
                     </div>
@@ -100,9 +101,9 @@
                         <th>Nama</th>
                         <th>Seat</th>
                         <th>Total Bayar</th>
-                        <th>Sisa Dibayar</th>
+                        <th>Sisa Bayar</th>
                         <th>Payment Status</th>
-                        <th>Status Order</th>
+                        <th>Order Status</th>
                         <th>Action</th>
                         </tr>
                     </thead>
@@ -134,8 +135,10 @@
                                     <td class="text-danger fw-bolder">TERLAMBAT</td>
                                 @endif
                             @elseif($order->order_status == 2)
-                                <td class="text-success fw-bolder">SELESAI</td>
+                                <td class="text-success fw-bolder">CONFIRMED</td>
                             @elseif($order->order_status == 3)
+                                <td class="text-success fw-bolder">SELESAI</td>
+                            @elseif($order->order_status == 4)
                                 <td class="text-danger fst-italic">BATAL</td>
                             @else
                                 <td class="text-danger fw-bolder">TIDAK DATANG</td>

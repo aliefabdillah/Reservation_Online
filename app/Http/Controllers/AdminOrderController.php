@@ -57,16 +57,18 @@ class AdminOrderController extends Controller
         $data_order->save();
 
         // jika status orderan di batalkan atau tidak ada
-        if ($request->status == 3 || $request->status == 4) {
+        if ($request->status == 4 || $request->status == 5) {
             $data_orderMenu = OrderMenu::where('order_id', $request->idOrder)->get();
             foreach($data_orderMenu as $orderMenu){
                 Menu::where('id', $orderMenu->menu_id)->increment('stok', $orderMenu->jumlah_pesan);
             }
         }
 
-        $seat = Seat::find($data_order->seat_id);
-        $seat->is_available = 1;
-        $seat->save();
+        if ($request->status == 3) {
+            $seat = Seat::find($data_order->seat_id);
+            $seat->is_available = 1;
+            $seat->save();
+        }
         
         return redirect()->route('showOrder')->with('pesan',"Update Status Order berhasil");
     }
