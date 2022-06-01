@@ -6,16 +6,13 @@
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Form Insert Data</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Tambah Data Tempat Duduk</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form class="form" action="{{ route('addSeat') }}" method="post">
                     @csrf
                     <div class="container-md p-4 my-3 border">
-                        <!-- <div class="row">
-                            <input class="form-control" type="text" id="id" name="id" readonly></p>
-                        </div> -->
                         <div class="row">
                             <p>Kode Tempat Duduk</p>  
                             <input class="form-control" type="text" name="kodeSeat">
@@ -37,7 +34,7 @@
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Form Insert Data</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Edit Data Tempat Duduk</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">

@@ -1,33 +1,55 @@
 @extends('adminTemplate.v_template')
 
 @section('content')
-    <!-- Modal Edit Start-->
+    <!-- Modal detail Start-->
     <div class="modal fade" id="detailOrder" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Detail Order</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Detail Pesanan</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" id="detail_order">
             </div>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">Menu</th>
-                        <th scope="col">Harga Satuan</th>
-                        <th scope="col">QTY</th>
-                        <th scope="col">Total Harga</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    
-                </tbody>
-            </table>
             </div>
         </div>
     </div>
-    <!-- Modal Edit End-->
+    <!-- Modal detail End-->
+
+    <!-- Modal Edit status Start-->
+    <div class="modal fade" id="editStatusOrder" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit Status Order</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="form" action="{{ route('changeStatusOrder') }}" method="post">
+                    @csrf
+                    @method('PUT')
+                    <div class="container-md p-4 my-3 border">
+                        <div class="row">
+                            <p>Status Order</p>  
+                            <input class="form-control" type="text" id="idOrder" name="idOrder" hidden>
+                            <select class="form-select" name="status" aria-label="Default select example">
+                                <option selected hidden>Pilih Status...</option>
+                                <option value=2>Selesai</option>
+                                <option value=3>Batal</option>
+                                <option value=4>Tidak Datang</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <input class="btn btn-success" type="submit" name="submit" value="Update">
+                    </div>
+                </form>
+            </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal Edit status End-->
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -67,46 +89,68 @@
                         <a href="{{ route('showOrder') }}"><input class="btn btn-danger btn-sm" type="button" name='reset' value="Reset"></a>    
                     </form>
                 </div>
-                <div class="col-sm-6">
-                    <button type='button' class='btn btn-primary float-sm-right me-5' data-bs-toggle="modal" data-bs-target="#formInsertMenu"> + Tambah Baru </button><br>
-                </div>
             </div>
 
             <div class="table-responsive">
                 <table class="table table-striped">
                     <thead>
-                        <tr>
+                        <tr class="text-center">
                         <th>Order Id</th>
                         <th>Waktu Reservasi</th>
                         <th>Nama</th>
-                        <th>Telepon</th>
                         <th>Seat</th>
-                        <th>Total Harga</th>
+                        <th>Total Bayar</th>
+                        <th>Sisa Dibayar</th>
+                        <th>Payment Status</th>
+                        <th>Status Order</th>
                         <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         @forelse ($data_orders as $order)
-                        <tr>
+                        <tr class="text-center">
+                            @php
+                                $orderTime = date('H:i:s', strtotime($order->waktu_reservasi));
+                                $currentTime = strtotime(date('H:i:s'));
+                                $lateTime = strtotime($orderTime) + 900;
+                            @endphp
                             <td>{{$order->id}}</td>
-                            <td>{{$order->waktu_reservasi}}</td>
+                            <td>{{$orderTime}}</td>
                             <td>{{$order->nama}}</td>
-                            <td>{{$order->telp}}</td>
                             <td>{{$order->kode_seat}}</td>
                             <td>RP{{$order->total_harga}},-</td>
+                            <td>RP{{$order->sisa}},-</td>
+                            @if($order->payment_status == 1)
+                                <td class="text-dark fw-bolder">PENDING</td>
+                            @elseif($order->payment_status == 2)
+                                <td class="text-success fw-bolder">SUCCESS</td>
+                            @else
+                                <td class="text-danger fw-bolder">EXPIRED</td>
+                            @endif
+                            @if($order->order_status == 1)
+                                @if($currentTime < $lateTime)
+                                    <td class="text-primary fw-bolder">NOT ARRIVED</td>
+                                @else
+                                    <td class="text-danger fw-bolder">TERLAMBAT</td>
+                                @endif
+                            @elseif($order->order_status == 2)
+                                <td class="text-success fw-bolder">SELESAI</td>
+                            @elseif($order->order_status == 3)
+                                <td class="text-danger fst-italic">BATAL</td>
+                            @else
+                                <td class="text-danger fw-bolder">TIDAK DATANG</td>
+                            @endif
                             <td>
                                 <div class="d-flex flex-row">
-                                    <button type='button' class='btn btn-info btn-sm me-3 detailBtn' data-bs-toggle="modal" data-bs-target="#detailOrder">Detail Pesanan</button>
-                                    <form class="" action="{{ route('deleteOrder', ['orderId' => $order->id]) }}" method="post">
-                                        @method('delete')
-                                        @csrf
-                                        <input type='submit' name="submit" value="Delete" class='btn btn-danger btn-sm me-3'>
-                                    </form>
+                                    <a href="{{ route('detailOrder', ['orderId' => $order->id]) }}" type='button' class='btn btn-info btn-sm me-3 detailBtn'>Detail Pesanan</a>
+                                    @if($order->order_status != 4 && $order->order_status != 3)
+                                        <button type='button' class='btn btn-warning btn-sm me-3 editStatusBtn' data-bs-toggle="modal" data-bs-target="#editStatusOrder">Edit Status</button>
+                                    @endif
                                 </div>
                             </td>
                         </tr>
                         @empty
-                        <td colspan="7" class="text-center">Tidak ada data...</td>
+                        <td colspan="9" class="text-center">Tidak ada data...</td>
                         @endforelse
                     </tbody>
                 </table>
