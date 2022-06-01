@@ -74,7 +74,7 @@
                             </tr>
                             <tr>
                                 <td>Total Harga</td>
-                                <td><b>Rp {{ number_format($details->total_price, 2, ',') }}</b></td>
+                                <td><b>Rp {{ number_format($details->total_price, 2, ',', '.') }}</b></td>
                             </tr>
                             <tr>
                                 <td>Status Pembayaran</td>
