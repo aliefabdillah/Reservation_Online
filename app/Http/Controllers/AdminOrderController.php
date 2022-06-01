@@ -64,7 +64,7 @@ class AdminOrderController extends Controller
             }
         }
 
-        if ($request->status == 3) {
+        if ($request->status == 3 || $request->status == 4 || $request->status == 5) {
             $seat = Seat::find($data_order->seat_id);
             $seat->is_available = 1;
             $seat->save();

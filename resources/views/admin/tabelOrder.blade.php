@@ -146,7 +146,7 @@
                             <td>
                                 <div class="d-flex flex-row">
                                     <a href="{{ route('detailOrder', ['orderId' => $order->id]) }}" type='button' class='btn btn-info btn-sm me-3 detailBtn'>Detail Pesanan</a>
-                                    @if($order->order_status != 4 && $order->order_status != 3)
+                                    @if($order->order_status == 1 || $order->order_status == 2) 
                                         <button type='button' class='btn btn-warning btn-sm me-3 editStatusBtn' data-bs-toggle="modal" data-bs-target="#editStatusOrder">Edit Status</button>
                                     @endif
                                 </div>
