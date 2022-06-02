@@ -27,7 +27,9 @@ class AdminOrderController extends Controller
         }
         else {
             // redirect ke view tabel tempat duduk
-            $data_orders = Order::orderBy('orders.waktu_reservasi','ASC')->join('customers', 'customers.id', '=', 'orders.customer_id')
+            $currentDate =  date('Y-m-d');
+            $data_orders = Order::where('orders.waktu_reservasi', 'like', "%{$currentDate}%")
+                            ->orderBy('orders.waktu_reservasi','ASC')->join('customers', 'customers.id', '=', 'orders.customer_id')
                             ->join('seats', 'seats.id', '=', 'orders.seat_id')
                             ->join('transactions', 'transactions.order_id', '=', 'orders.id')
                             ->leftJoin('transaction_details', 'transaction_details.transaction_id', '=', 'transactions.id')
@@ -38,14 +40,36 @@ class AdminOrderController extends Controller
 
     public function searchOrder(Request $request)
     {
-        $result = Order::where('orders.id', 'like', "%{$request->search}%")->orderBy('orders.waktu_reservasi','ASC')
-                        ->join('customers', 'customers.id', '=', 'orders.customer_id')
+
+        if (empty($request->search)) {
+            if (empty($request->searchDate)) {
+                $currentDate =  date('Y-m-d');
+                $result = Order::where('orders.waktu_reservasi', 'like', "%{$currentDate}%")->orderBy('orders.waktu_reservasi','ASC');
+            }
+            else {
+                $result = Order::where('orders.waktu_reservasi', 'like', "%{$request->searchDate}%")->orderBy('orders.waktu_reservasi','ASC');
+            }
+        }else {
+            if (empty($request->searchDate)) {
+                $currentDate =  date('Y-m-d');
+                $result = Order::where('orders.waktu_reservasi', 'like', "%{$currentDate}%")
+                                ->where('orders.id', 'like', "%{$request->id}%")
+                                ->orderBy('orders.waktu_reservasi','ASC');
+            }
+            else {
+                $result = Order::where('orders.waktu_reservasi', 'like', "%{$request->searchDate}%")
+                                ->where('orders.id', 'like', "%{$request->id}%")
+                                ->orderBy('orders.waktu_reservasi','ASC');
+            }
+        }
+        
+        $res = $result->join('customers', 'customers.id', '=', 'orders.customer_id')
                         ->join('seats', 'seats.id', '=', 'orders.seat_id')
                         ->join('transactions', 'transactions.order_id', '=', 'orders.id')
                         ->leftJoin('transaction_details', 'transaction_details.transaction_id', '=', 'transactions.id')
                         ->get(['orders.*', 'customers.nama', 'seats.nama AS kode_seat', 'transaction_details.sisa', 'transaction_details.payment_status']);
         
-        return view('admin.tabelOrder', ['data_orders' => $result]);
+        return view('admin.tabelOrder', ['data_orders' => $res]);
     }
 
     // hapus data seat dari db
