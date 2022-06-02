@@ -4,8 +4,121 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<<<<<<< HEAD
     <title>Reservasi Online</title>
+=======
+    <title>Pilih Tempat Duduk</title>
+>>>>>>> 2cdea66e96fa510c6478ff50e8130d357d6a8ca0
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <style>
+		@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,500;0,700;1,400&family=Secular+One&display=swap');
+		body, html{
+			margin: 0;
+			height: 100%;
+            font-family: 'Montserrat', sans-serif;
+		}
+
+		h1{
+            margin: 20px;
+			font-size: 30px;
+		}
+
+        .container {
+            border: 1px solid #000000;
+            border-radius: 5px;
+            padding: 10px 30px 30px 30px;
+        }
+
+        .container-1 {
+            display: flex;
+            align-items : flex-start;
+            justify-content: space-between;
+            padding: 20px 50px;
+        }
+
+        .flex-container-1{
+            background-color: #C4C4C4;
+            width: 13%;
+            margin: 10px;   
+            text-align: center;
+            line-height: 70px;
+            font-size: 20px;
+        }
+
+        .container-2 {
+            display: flex;
+            align-items: flex-start;
+            
+            justify-content: space-between;
+        }
+
+        .flex-container-2{
+            background-color: #C4C4C4;
+            width: 17%;
+            margin: 25px;
+            padding: 15px;
+            text-align: center;
+            line-height: 100px;
+            font-size: 20px;
+        }
+
+        .flex-container-3{
+            background-color: #C4C4C4;
+            width: 13%;
+            margin: 50px 15px 0 0;   
+            text-align: center;
+            line-height: 70px;
+            font-size: 20px;
+        }
+
+        .flex-container-4{
+            background-color: #C4C4C4;
+            width: 13%;
+            margin: 50px 0 0 20px;
+            text-align: center;
+            line-height: 70px;
+            font-size: 20px;
+        }
+
+        .mb-3 p{
+            padding :0px;
+            margin : 0;
+            text-align: justify;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .mb-3 label{
+            margin: 0;
+            color: #8A8A8A;
+        }
+
+        p {
+            text-align: center;
+        }
+
+		@media screen and (max-width: 800px) {
+			h1{
+				font-size: 45px;
+			}
+
+			.btn{
+				font-size: 18px;
+			}
+		}
+		
+		@media screen and (max-width: 400px) {
+			h1{
+				font-size: 30px;
+			}
+
+			.btn{
+				font-size: 12px;
+			}
+		}
+	</style>
 </head>
 <body>
     <nav class="navbar navbar-dark bg-dark">
@@ -21,28 +134,55 @@
     @endif
     <form class="form" action="{{ route('submit.tempatDuduk') }}" method="post">
         @csrf
-        <div class="mb-3">
-            <label>Waktu Kedatangan :</label>
-            <input type="time" min="10:00" max="22:00" name="waktu"><br>
-            <p>Waktu Operasional Restoran dari jam 10:00 - 22:00</p>
-        </div>
-        <div class="mb-3">
-            <label>List Tempat Duduk</label>
-            <ul>
-                @foreach ($seat as $s)
-                    <li>{{ $s->nama }}</li>
-                @endforeach
-            </ul>
-        </div>
-        <div class="mb-3">
-            <label>Tempat:</label>
-            <input type="text" name="tempatDuduk">
-        </div>
+        <div class="container">
+            <div class="mb-3">
+                <p> Keterangan Kode<br>
+                    Contoh : 4B1<br>
+                    4 = jumlah kursi<br>
+                    B = Baris<br>
+                    1 = Kolom<br>
+                </p>
+            </div>
+            <div class="mb-3">
+                <label>Waktu Kedatangan :</label>
+                <input type="time" min="10:00" max="22:00" name="waktu"><br>
+                <p>Waktu Operasional Restoran dari jam 10:00 - 22:00</p>
+            </div>
+            <div class="mb-3">
+                <!-- <label>List Tempat Duduk</label> -->
+                <!-- <ul>
+                    @foreach ($seat as $s)
+                        <li>{{ $s->nama }}</li>
+                    @endforeach
+                </ul> -->
+                <div class="container">
+                    <div class="container-1">
+                        <div class="flex-container-1">2A1</div>
+                        <div class="flex-container-1">2A2</div>
+                        <div class="flex-container-1">2A3</div>
+                        <div class="flex-container-1">2A4</div>
+                    </div>
+                    
+                    <div class="container-2">
+                        <div class="flex-container-2">4D1</div>
+                        <div class="flex-container-3">2D2</div>
+                        <div class="flex-container-4">2D3</div>
+                        <div class="flex-container-2">4D4</div>
+                    </div>
+                </div>
+            </div>
+            <div class="m-4 d-grid gap-2 col-3 mx-auto">
+                <!-- <label class="">Tempat Yang Dipilih:</label> -->
+                <input type="text" name="tempatDuduk" placeholder="Tempat yang Dipilih...">
+            </div>
         @if(\Session::get('login') == TRUE)
-            <input type="submit" name="submit" value="Submit" class="btn btn-primary">
+            <div class="d-grid gap-2 col-2 mx-auto">
+                <input type="submit" name="submit" value="Submit" class="btn btn-primary">
+            </div>
         @else
-            <label>Untuk Memilih Tempat Duduk Anda Perlu Login? <a href="{{ route('signIn') }}">Login Sekarang!</a></label>
+            <p>Untuk Memilih Tempat Duduk Anda Perlu Login? <a href="{{ route('signIn') }}">Login Sekarang!</a></p>
         @endif
+        </div>
     </form>
     @if(\Session::has('validate'))
         <div class="alert alert-danger">
