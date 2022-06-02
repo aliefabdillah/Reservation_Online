@@ -126,8 +126,6 @@
         </div>
     </nav>
 
-    @if(\Session::get('login') == TRUE)
-    @endif
     <form class="form" action="{{ route('submit.tempatDuduk') }}" method="post">
         @csrf
         <div class="container">
