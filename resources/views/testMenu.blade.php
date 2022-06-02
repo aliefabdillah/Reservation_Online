@@ -30,8 +30,10 @@
 <body>
     <nav class="navbar navbar-dark bg-dark">
         <div class="container-fluid d-flex justify-content-beetwen">
-            <span class="navbar-brand mb-0 h1">Pilih Menu</span>
-            <a href="#" class="navbar-brand mb-0 h1">Logout</a>
+            <span class="navbar-brand mb-0 h1">PILIH TEMPAT DUDUK</span>
+            @if(\Session::get('login') == TRUE)
+            <a href="{{ route('customerLogout') }}"><button type="button" class="btn btn-danger float-end">Logout</button></a>
+            @endif
         </div>
     </nav>
 
@@ -83,7 +85,7 @@
                 @endforeach
             </div>
             <input class="float-right" type="submit" value="Checkout" id="submit" disabled>
-        </form>
+            </form>
         </div>
     </div>
 
