@@ -128,7 +128,7 @@
 
     <form class="form" action="{{ route('submit.tempatDuduk') }}" method="post">
         @csrf
-        <div class="container">
+        <div class="container mt-3">
             <div class="mb-3">
                 <p> Keterangan Kode<br>
                     Contoh : 4B1<br>

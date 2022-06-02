@@ -39,7 +39,7 @@
 
     <div class="stamp container-sm border border-dark m-4 p-2">
         <p>Waktu Kedatangan : {{$waktu}}</p>
-        <p>Nomor Kursi : {{$tempatDuduk}}</p>
+        <p>Nomor Kursi : {{$nama_tempatDuduk}}</p>
     </div>
 
     <div class="menu container-xl rounded bg-secondary m-4 p-2 d-flex flex-column">
