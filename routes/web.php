@@ -61,8 +61,6 @@ Route::get('/user/invoice/{id}', [OrderController::class,'showInvoice'])->name('
 
 // Validation
 Route::get('/user/validation/{status}', [TransactionController::class, 'validationStatus'])->name('validation');
-//tampil validation succes
-// Route::get('/user/validation', [Controller::class,'validationFailed'])->name('validation.failed');                 //tampil validation failed
 /*=========== USER END =============*/
 
 
