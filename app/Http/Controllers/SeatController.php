@@ -33,7 +33,7 @@ class SeatController extends Controller
                     $minuman = Menu::where('jenis', 'minuman')->get();
     
                     // menampilkan view menu
-                    return view('testMenu', compact("makanan", "minuman", "waktu", "tempatDuduk"));
+                    return view('testMenu', compact("makanan", "minuman", "waktu", "tempatDuduk", "nama_tempatDuduk"));
                     // return view('menu', compact("makanan", "minuman", "waktu", "tempatDuduk"));
                 }
                 else {

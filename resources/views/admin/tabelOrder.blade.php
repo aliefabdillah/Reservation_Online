@@ -84,8 +84,12 @@
                     <form action="{{ route('searchOrder') }}" method="get">
                         @csrf
                         <h2 class="Head-index"></h2>
-                        <label class="ms-3">Cari : </label> 
-                        <input id="search" type="text" name='search' placeholder="cari...">
+                        <label class="ms-1">Cari : </label>
+                         
+                        <input class="me-3" type="text" name='search' placeholder="cari...">
+                        <span>/</span>
+                        <input class="ms-3 me-2" type="date" name='searchDate'>
+                    
                         <input class="btn btn-success btn-sm" type="submit" name='submit'>
                         <a href="{{ route('showOrder') }}"><input class="btn btn-danger btn-sm" type="button" name='reset' value="Reset"></a>    
                     </form>
