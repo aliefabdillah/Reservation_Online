@@ -152,9 +152,15 @@
                                 @endif
                             @elseif(substr($s->nama, 0, 1) == "4")
                                 @if($s->is_available == 1)
-                                    <div class="flex-container-2 m-4 text-light bg-success">{{$s->nama}}</div>
+                                    <div class="flex-container-2 m-3 text-light bg-success">{{$s->nama}}</div>
                                 @else
-                                    <div class="flex-container-2 m-4 text-light bg-danger">{{$s->nama}}</div>
+                                    <div class="flex-container-2 m-3 text-light bg-danger">{{$s->nama}}</div>
+                                @endif
+                            @elseif(substr($s->nama, 0, 1) == "6")
+                                @if($s->is_available == 1)
+                                    <div class="flex-container-3 m-3 text-light bg-success">{{$s->nama}}</div>
+                                @else
+                                    <div class="flex-container-3 m-3 text-light bg-danger">{{$s->nama}}</div>
                                 @endif
                             @endif
                         @endforeach
