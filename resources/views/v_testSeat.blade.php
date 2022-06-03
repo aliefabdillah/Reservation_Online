@@ -35,7 +35,7 @@
         .flex-container-1{
             background-color: #C4C4C4;
             width: 13%;
-            margin: 10px;   
+            /* margin: 10px;    */
             text-align: center;
             line-height: 70px;
             font-size: 20px;
@@ -61,7 +61,7 @@
         .flex-container-3{
             background-color: #C4C4C4;
             width: 13%;
-            margin: 50px 15px 0 0;   
+            margin: 50px 0 0 0;   
             text-align: center;
             line-height: 70px;
             font-size: 20px;
@@ -70,7 +70,7 @@
         .flex-container-4{
             background-color: #C4C4C4;
             width: 13%;
-            margin: 50px 0 0 20px;
+            margin: 50px 0 0 0;
             text-align: center;
             line-height: 70px;
             font-size: 20px;
@@ -137,9 +137,14 @@
                     1 = Kolom<br>
                 </p>
             </div>
+            @if(\Session::has('validate'))
+            <div class="alert alert-danger">
+                <div>{{Session::get('validate')}}</div>
+            </div>
+            @endif
             <div class="mb-3">
-                <label>Waktu Kedatangan :</label>
-                <input type="time" min="10:00" max="22:00" name="waktu"><br>
+                <span>Waktu Kedatangan :</span>
+                <input type="time"  min="10:00" max="22:00" name="waktu">
                 <p>Waktu Operasional Restoran dari jam 10:00 - 22:00</p>
             </div>
             <div class="mb-3">
@@ -150,24 +155,30 @@
                     @endforeach
                 </ul> -->
                 <div class="container">
-                    <div class="container-1">
-                        <div class="flex-container-1">2A1</div>
-                        <div class="flex-container-1">2A2</div>
+                    <div class="container-1 flex-wrap">
+                        @foreach ($seat as $s)
+                            @if($s->is_available == 1)
+                                <div class="flex-container-1 m-4 text-light bg-success">{{$s->nama}}</div>
+                            @else
+                                <div class="flex-container-1 m-4 text-light bg-danger">{{$s->nama}}</div>
+                            @endif
+                        @endforeach
+                        <!-- <div class="flex-container-1">2A2</div>
                         <div class="flex-container-1">2A3</div>
-                        <div class="flex-container-1">2A4</div>
+                        <div class="flex-container-1">2A4</div> -->
                     </div>
                     
-                    <div class="container-2">
-                        <div class="flex-container-2">4D1</div>
-                        <div class="flex-container-3">2D2</div>
-                        <div class="flex-container-4">2D3</div>
-                        <div class="flex-container-2">4D4</div>
-                    </div>
+                    <!-- <div class="container-1">
+                        <div class="flex-container-1">4D1</div>
+                        <div class="flex-container-1">2D2</div>
+                        <div class="flex-container-1">2D3</div>
+                        <div class="flex-container-1">4D4</div>
+                    </div> -->
                 </div>
             </div>
             <div class="m-4 d-grid gap-2 col-3 mx-auto">
                 <!-- <label class="">Tempat Yang Dipilih:</label> -->
-                <input type="text" name="tempatDuduk" placeholder="Tempat yang Dipilih...">
+                <input type="text" class="text-center form-control" name="tempatDuduk" placeholder="Tempat yang Dipilih...">
             </div>
         @if(\Session::get('login') == TRUE)
             <div class="d-grid gap-2 col-2 mx-auto">
@@ -178,10 +189,5 @@
         @endif
         </div>
     </form>
-    @if(\Session::has('validate'))
-        <div class="alert alert-danger">
-            <div>{{Session::get('validate')}}</div>
-        </div>
-    @endif
 </body>
 </html>
