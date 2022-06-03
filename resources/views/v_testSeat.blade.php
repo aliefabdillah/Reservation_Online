@@ -35,7 +35,6 @@
         .flex-container-1{
             background-color: #C4C4C4;
             width: 13%;
-            /* margin: 10px;    */
             text-align: center;
             line-height: 70px;
             font-size: 20px;
@@ -51,8 +50,6 @@
         .flex-container-2{
             background-color: #C4C4C4;
             width: 17%;
-            margin: 25px;
-            padding: 15px;
             text-align: center;
             line-height: 100px;
             font-size: 20px;
@@ -60,19 +57,9 @@
 
         .flex-container-3{
             background-color: #C4C4C4;
-            width: 13%;
-            margin: 50px 0 0 0;   
+            width: 28%;  
             text-align: center;
-            line-height: 70px;
-            font-size: 20px;
-        }
-
-        .flex-container-4{
-            background-color: #C4C4C4;
-            width: 13%;
-            margin: 50px 0 0 0;
-            text-align: center;
-            line-height: 70px;
+            line-height: 150px;
             font-size: 20px;
         }
 
