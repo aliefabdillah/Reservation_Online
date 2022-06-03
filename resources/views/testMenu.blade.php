@@ -28,64 +28,65 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-dark bg-dark">
-        <div class="container-fluid d-flex justify-content-beetwen">
-            <span class="navbar-brand mb-0 h1">PILIH TEMPAT DUDUK</span>
-            @if(\Session::get('login') == TRUE)
-            <a href="{{ route('customerLogout') }}"><button type="button" class="btn btn-danger float-end">Logout</button></a>
-            @endif
-        </div>
-    </nav>
-
-    <div class="stamp container-sm border border-dark m-4 p-2">
-        <p>Waktu Kedatangan : {{$waktu}}</p>
-        <p>Nomor Kursi : {{$nama_tempatDuduk}}</p>
-    </div>
-
-    <div class="menu container-xl rounded bg-secondary m-4 p-2 d-flex flex-column">
-        <div class="container d-flex flex-column p-1  align-items-center">
-            <div class="head1 rounded d-flex flex-row bg-white p-1 justify-content-center">
-                <p class="my-auto mx-3">Makanan</p>
+    <div class="container-responsive">
+        <nav class="navbar navbar-dark bg-dark">
+            <div class="container-fluid d-flex justify-content-beetwen">
+                <span class="navbar-brand mb-0 h1">PILIH TEMPAT DUDUK</span>
+                @if(\Session::get('login') == TRUE)
+                <a href="{{ route('customerLogout') }}"><button type="button" class="btn btn-danger float-end">Logout</button></a>
+                @endif
             </div>
-            <div class="container p-1 rounded my-3">
+        </nav>
+    
+        <div class="container">
+            <div class="stamp container-sm border border-dark m-4 p-2">
+                <p>Waktu Kedatangan : {{$waktu}}</p>
+                <p>Nomor Kursi : {{$nama_tempatDuduk}}</p>
+            </div>
+        
+            <div class="menu container-xs rounded bg-secondary m-4 p-2 d-flex flex-column">
                 <form class="d-flex flex-wrap" action="{{ route('check') }}" method="POST">
                     @csrf
                     <input type="hidden" name="seat_id" value="{{$tempatDuduk}}">
                     <input type="hidden" name="waktu" value="{{$waktu}}">
-                    @php($i = 0)
-                    @foreach ($makanan as $m)
-                    <div class="d-flex flex-column bg-white rounded p-1 m-2">
-                        <p class="my-auto mx-3"> {{ $m->nama }}</p>
-                        <p class="my-auto mx-3"> {{ $m->harga }}</p>
-                        <div class="d-flex flex-row align-items-center">
-                            <p class="my-auto mx-3"> pesan </p>
-                            <input type="checkbox" name="menu[{{$i++}}]" value="{{$m->id}}" onchange="checkbox(this)"><br>
+                    <div class="container d-flex flex-column p-1  align-items-center">
+                        <div class="head1 rounded d-flex flex-row bg-white p-1 justify-content-center">
+                            <p class="my-auto mx-3">Makanan</p>
                         </div>
-                        <input class="my-auto mx-3" type="number" name="qty[]" onkeyup="noMinus(this)"><br>
+                        <div class="container p-1 rounded my-3">
+                            @php($i = 0)
+                            @foreach ($makanan as $m)
+                            <div class="d-flex flex-column bg-white rounded p-1 m-2">
+                                <p class="my-auto mx-3"> {{ $m->nama }}</p>
+                                <p class="my-auto mx-3"> {{ $m->harga }}</p>
+                                <div class="d-flex flex-row align-items-center">
+                                    <p class="my-auto mx-3"> pesan </p>
+                                    <input type="checkbox" name="menu[{{$i++}}]" value="{{$m->id}}" onchange="checkbox(this)"><br>
+                                </div>
+                                <input class="my-auto mx-3" type="number" name="qty[]" onkeyup="noMinus(this)"><br>
+                            </div>
+                            @endforeach
+                        </div>
+                        <div class="head1 rounded d-flex flex-row bg-white p-1 justify-content-center mb-3">
+                            <p class="my-auto mx-3">Minuman</p>
+                        </div>
+                        <div class="container d-flex flex-wrap">
+                            @foreach ($minuman as $m)
+                            <div class="d-flex flex-column bg-white rounded p-1 m-2">
+                                <p class="my-auto mx-3"> {{ $m->nama }}</p>
+                                <p class="my-auto mx-3"> {{ $m->harga }}</p>
+                                <div class="d-flex flex-row align-items-center">
+                                    <p class="my-auto mx-3"> pesan </p>
+                                    <input type="checkbox" name="menu[{{$i++}}]" value="{{$m->id}}" onchange="checkbox(this)"><br>
+                                </div>
+                                <input class="my-auto mx-3" type="number" name="qty[]" onkeyup="noMinus(this)" ><br>
+                            </div>
+                            @endforeach
+                        </div>
+                        <input class="float-right" type="submit" value="Checkout" id="submit" disabled>
                     </div>
-                    @endforeach
+                </form>
             </div>
-            <div class="head1 rounded d-flex flex-row bg-white p-1 justify-content-center mb-3">
-                <p class="my-auto mx-3">Minuman</p>
-            </div>
-            <div class="container d-flex flex-wrap">
-                @csrf
-                @php($i = 0)
-
-                @foreach ($minuman as $m)
-                <div class="d-flex flex-column bg-white rounded p-1 m-2">
-                    <p class="my-auto mx-3"> {{ $m->nama }}</p>
-                    <p class="my-auto mx-3"> {{ $m->harga }}</p>
-                    <div class="d-flex flex-row align-items-center">
-                        <p class="my-auto mx-3"> pesan </p>
-                        <input type="checkbox" name="menu[{{$i++}}]" value="{{$m->id}}" onchange="checkbox(this)"><br>
-                    </div>
-                    <input class="my-auto mx-3" type="number" name="qty[]" onkeyup="noMinus(this)"><br>
-                </div>
-                @endforeach
-            </div>
-            <input class="float-right" type="submit" value="Checkout" id="submit" disabled>
-            </form>
         </div>
     </div>
 
