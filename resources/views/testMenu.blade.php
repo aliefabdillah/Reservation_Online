@@ -31,7 +31,7 @@
     <div class="container-responsive">
         <nav class="navbar navbar-dark bg-dark">
             <div class="container-fluid d-flex justify-content-beetwen">
-                <span class="navbar-brand mb-0 h1">PILIH TEMPAT DUDUK</span>
+                <span class="navbar-brand mb-0 h1">PILIH MENU</span>
                 @if(\Session::get('login') == TRUE)
                 <a href="{{ route('customerLogout') }}"><button type="button" class="btn btn-light float-end">Logout</button></a>
                 @endif
@@ -82,7 +82,7 @@
                             <div class="d-flex flex-column bg-white rounded p-1 m-2">
                                 <p class="my-auto mx-3"> {{ $m->nama }}</p>
                                 <p class="my-auto mx-3"> {{ $m->harga }}</p>
-                                <div class="d-flex flex-row align-items-center justify-content-between">
+                                <div class="d-flex flex-row align-items-center">
                                 @if($m->stok != 0)
                                     <p class="my-auto mx-3"> pesan </p>
                                     <input class="m-0" type="checkbox" name="menu[{{$i++}}]" value="{{$m->id}}" onchange="checkbox(this)"><br>
