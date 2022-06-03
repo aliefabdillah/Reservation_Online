@@ -78,9 +78,9 @@
                             <div class="d-flex flex-column bg-white rounded p-1 m-2">
                                 <p class="my-auto mx-3"> {{ $m->nama }}</p>
                                 <p class="my-auto mx-3"> {{ $m->harga }}</p>
-                                <div class="d-flex flex-row align-items-center">
+                                <div class="d-flex flex-row align-items-center justify-content-between">
                                     <p class="my-auto mx-3"> pesan </p>
-                                    <input type="checkbox" name="menu[{{$i++}}]" value="{{$m->id}}" onchange="checkbox(this)"><br>
+                                    <input class="m-0" type="checkbox" name="menu[{{$i++}}]" value="{{$m->id}}" onchange="checkbox(this)"><br>
                                 </div>
                                 <input class="my-auto mx-3 w-25" type="number" name="qty[]" value="0" onkeyup="noMinus(this)" readonly ><br>
                             </div>
