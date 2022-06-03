@@ -37,13 +37,13 @@
                 @endif
             </div>
         </nav>
-    
+
         <div class="container">
             <div class="stamp container-sm border border-dark m-4 p-2">
                 <p>Waktu Kedatangan : {{$waktu}}</p>
                 <p>Nomor Kursi : {{$nama_tempatDuduk}}</p>
             </div>
-        
+
             <div class="menu container-sm rounded bg-secondary p-2 d-flex flex-column" style="max-width: 1200px;">
                 <form class="d-flex flex-wrap" action="{{ route('check') }}" method="POST">
                     @csrf
@@ -64,7 +64,7 @@
                                     <p class="my-auto mx-3"> pesan </p>
                                     <input type="checkbox" name="menu[{{$i++}}]" value="{{$m->id}}" onchange="checkbox(this)"><br>
                                 </div>
-                                <input class="my-auto mx-3" type="number" name="qty[]" onkeyup="noMinus(this)"><br>
+                                <input class="my-auto mx-3" type="number" name="qty[]" value="0" onkeyup="noMinus(this)" disabled><br>
                             </div>
                             @endforeach
                         </div>
@@ -82,7 +82,7 @@
                                     <p class="my-auto mx-3"> pesan </p>
                                     <input type="checkbox" name="menu[{{$i++}}]" value="{{$m->id}}" onchange="checkbox(this)"><br>
                                 </div>
-                                <input class="my-auto mx-3" type="number" name="qty[]" onkeyup="noMinus(this)" ><br>
+                                <input class="my-auto mx-3" type="number" name="qty[]" value="1" onkeyup="noMinus(this)" disabled ><br>
                             </div>
                             @endforeach
                         </div>
@@ -100,12 +100,13 @@
             var checkedOne = Array.prototype.slice.call(checkboxes).some(x => x.checked);
             if (checkedOne) document.getElementById("submit").disabled = false
             else document.getElementById("submit").disabled = true
-            el = element.nextSibling.nextSibling.nextSibling;
+            el = element.parentElement.nextSibling.nextSibling;
+            console.log(el);
             if (element.checked) {
-                el.style.display = "block"
+                el.disabled = false;
                 el.value = 1
             } else {
-                el.style.display = "none"
+                el.disabled = true;
                 el.value = 0
             }
         }
