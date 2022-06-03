@@ -49,31 +49,31 @@
                     @csrf
                     <input type="hidden" name="seat_id" value="{{$tempatDuduk}}">
                     <input type="hidden" name="waktu" value="{{$waktu}}">
-                    <div class="container d-flex flex-column p-1  align-items-center">
+                    <div class="container d-flex flex-column p-1 mt-3 align-items-center">
                         <div class="head1 rounded d-flex flex-row bg-white p-1 justify-content-center">
                             <p class="my-auto mx-3">Makanan</p>
                         </div>
                     </div>
-                        <div class="container d-flex flex-wrap">
+                        <div class="container d-flex justify-content-center flex-wrap">
                             @php($i = 0)
                             @foreach ($makanan as $m)
-                            <div class="d-flex flex-column bg-white rounded p-1 m-2">
+                            <div class="d-flex  col-12 col-md-3 flex-column bg-white rounded p-1 m-2" style="max-width: 200px;">
                                 <p class="my-auto mx-3"> {{ $m->nama }}</p>
                                 <p class="my-auto mx-3"> {{ $m->harga }}</p>
                                 <div class="d-flex flex-row align-items-center">
                                     <p class="my-auto mx-3"> pesan </p>
                                     <input type="checkbox" name="menu[{{$i++}}]" value="{{$m->id}}" onchange="checkbox(this)"><br>
                                 </div>
-                                <input class="my-auto mx-3" type="number" name="qty[]" value="0" onkeyup="noMinus(this)" disabled><br>
+                                <input class="text-center w-25 my-auto mx-3" type="number" name="qty[]" value="0" onkeyup="noMinus(this)" readonly><br>
                             </div>
                             @endforeach
                         </div>
-                        <div class="container d-flex flex-column p-1  align-items-center">
+                        <div class="container d-flex flex-column mt-3 p-1  align-items-center">
                             <div class="head1 rounded d-flex flex-row bg-white p-1 justify-content-center">
                                 <p class="my-auto mx-3">Minuman</p>
                             </div>
                         </div>
-                        <div class="container d-flex flex-wrap">
+                        <div class="container d-flex justify-content-center  flex-wrap">
                             @foreach ($minuman as $m)
                             <div class="d-flex flex-column bg-white rounded p-1 m-2">
                                 <p class="my-auto mx-3"> {{ $m->nama }}</p>
@@ -82,12 +82,12 @@
                                     <p class="my-auto mx-3"> pesan </p>
                                     <input type="checkbox" name="menu[{{$i++}}]" value="{{$m->id}}" onchange="checkbox(this)"><br>
                                 </div>
-                                <input class="my-auto mx-3" type="number" name="qty[]" value="1" onkeyup="noMinus(this)" disabled ><br>
+                                <input class="my-auto mx-3 w-25" type="number" name="qty[]" value="0" onkeyup="noMinus(this)" readonly ><br>
                             </div>
                             @endforeach
                         </div>
                         <div class="container d-flex flex-column p-1  align-items-center">
-                            <input class="justify-content-center" type="submit" value="Checkout" id="submit" disabled>
+                            <input class="btn-primary w-25" type="submit" value="Checkout" id="submit" disabled>
                         </div>
                 </form>
             </div>
@@ -103,10 +103,10 @@
             el = element.parentElement.nextSibling.nextSibling;
             console.log(el);
             if (element.checked) {
-                el.disabled = false;
+                el.readOnly = false;
                 el.value = 1
             } else {
-                el.disabled = true;
+                el.readOnly = true;
                 el.value = 0
             }
         }

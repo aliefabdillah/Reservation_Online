@@ -142,7 +142,7 @@
                     @endforeach
                 </ul> -->
                 <div class="container">
-                    <div class="container-1 flex-wrap">
+                    <div class="container-1 align-items-center flex-wrap">
                         @foreach ($seat as $s)
                             @if(substr($s->nama, 0, 1) == "2")
                                 @if($s->is_available == 1)
