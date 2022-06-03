@@ -59,7 +59,7 @@ class AdminOrderController extends Controller
             else {
                 $result = Order::where('orders.waktu_reservasi', 'like', "%{$request->searchDate}%")
                                 ->where('orders.id', 'like', "%{$request->search}%")
-                                ->orderBy('orders.waktu_reservasi','ASC');
+                                ->orderBy('orders.waktu_reservasi','ASC');  
             }
         }
         
