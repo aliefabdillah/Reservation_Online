@@ -57,7 +57,7 @@
 
         .flex-container-3{
             background-color: #C4C4C4;
-            width: 28%;  
+            width: 25%;  
             text-align: center;
             line-height: 150px;
             font-size: 20px;
