@@ -38,7 +38,7 @@ class checkExpiredReservation extends Command
      */
     public function handle()
     {
-        Order::whereRaw("TIMESTAMPDIFF(MINUTE, waktu_reservasi, now()) > 15")->update(['order_status' => '4']);
+        Order::whereRaw("TIMESTAMPDIFF(MINUTE, waktu_reservasi, now()) > 15")->update(['order_status' => '5']);
         return 0;
     }
 }
