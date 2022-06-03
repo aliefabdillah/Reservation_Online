@@ -13,7 +13,9 @@ use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\TransactionDetailController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\OrderController;
+use App\Models\Order;
 use App\Models\Transaction;
+use Illuminate\Support\Facades\DB;
 
 /*
 |--------------------------------------------------------------------------

@@ -43,7 +43,7 @@
         .container-2 {
             display: flex;
             align-items: flex-start;
-            
+
             justify-content: space-between;
         }
 
@@ -57,7 +57,7 @@
 
         .flex-container-3{
             background-color: #C4C4C4;
-            width: 25%;  
+            width: 25%;
             text-align: center;
             line-height: 150px;
             font-size: 20px;
@@ -91,7 +91,7 @@
 				font-size: 18px;
 			}
 		}
-		
+
 		@media screen and (max-width: 400px) {
 			h1{
 				font-size: 30px;
@@ -168,7 +168,7 @@
                         <div class="flex-container-1">2A3</div>
                         <div class="flex-container-1">2A4</div> -->
                     </div>
-                    
+
                     <!-- <div class="container-1">
                         <div class="flex-container-1">4D1</div>
                         <div class="flex-container-1">2D2</div>
