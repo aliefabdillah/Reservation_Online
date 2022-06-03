@@ -108,7 +108,7 @@
         <div class="container-fluid d-flex justify-content-beetwen">
             <span class="navbar-brand mb-0 h1">PILIH TEMPAT DUDUK</span>
             @if(\Session::get('login') == TRUE)
-                <a href="{{ route('customerLogout') }}"><button type="button" class="btn btn-danger float-end">Logout</button></a>
+                <a href="{{ route('customerLogout') }}"><button type="button" class="btn btn-light float-end">Logout</button></a>
             @endif
         </div>
     </nav>

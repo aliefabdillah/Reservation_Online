@@ -53,12 +53,12 @@ class AdminOrderController extends Controller
             if (empty($request->searchDate)) {
                 $currentDate =  date('Y-m-d');
                 $result = Order::where('orders.waktu_reservasi', 'like', "%{$currentDate}%")
-                                ->orWhere('orders.id', 'like', "%{$request->id}%")
+                                ->where('orders.id', 'like', "%{$request->search}%")
                                 ->orderBy('orders.waktu_reservasi','ASC');
             }
             else {
                 $result = Order::where('orders.waktu_reservasi', 'like', "%{$request->searchDate}%")
-                                ->where('orders.id', 'like', "%{$request->id}%")
+                                ->where('orders.id', 'like', "%{$request->search}%")
                                 ->orderBy('orders.waktu_reservasi','ASC');
             }
         }
