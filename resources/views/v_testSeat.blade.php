@@ -35,7 +35,6 @@
         .flex-container-1{
             background-color: #C4C4C4;
             width: 13%;
-            /* margin: 10px;    */
             text-align: center;
             line-height: 70px;
             font-size: 20px;
@@ -51,8 +50,6 @@
         .flex-container-2{
             background-color: #C4C4C4;
             width: 17%;
-            margin: 25px;
-            padding: 15px;
             text-align: center;
             line-height: 100px;
             font-size: 20px;
@@ -60,19 +57,9 @@
 
         .flex-container-3{
             background-color: #C4C4C4;
-            width: 13%;
-            margin: 50px 0 0 0;   
+            width: 28%;  
             text-align: center;
-            line-height: 70px;
-            font-size: 20px;
-        }
-
-        .flex-container-4{
-            background-color: #C4C4C4;
-            width: 13%;
-            margin: 50px 0 0 0;
-            text-align: center;
-            line-height: 70px;
+            line-height: 150px;
             font-size: 20px;
         }
 
@@ -157,10 +144,24 @@
                 <div class="container">
                     <div class="container-1 flex-wrap">
                         @foreach ($seat as $s)
-                            @if($s->is_available == 1)
-                                <div class="flex-container-1 m-4 text-light bg-success">{{$s->nama}}</div>
-                            @else
-                                <div class="flex-container-1 m-4 text-light bg-danger">{{$s->nama}}</div>
+                            @if(substr($s->nama, 0, 1) == "2")
+                                @if($s->is_available == 1)
+                                    <div class="flex-container-1 m-4 text-light bg-success">{{$s->nama}}</div>
+                                @else
+                                    <div class="flex-container-1 m-4 text-light bg-danger">{{$s->nama}}</div>
+                                @endif
+                            @elseif(substr($s->nama, 0, 1) == "4")
+                                @if($s->is_available == 1)
+                                    <div class="flex-container-2 m-3 text-light bg-success">{{$s->nama}}</div>
+                                @else
+                                    <div class="flex-container-2 m-3 text-light bg-danger">{{$s->nama}}</div>
+                                @endif
+                            @elseif(substr($s->nama, 0, 1) == "6")
+                                @if($s->is_available == 1)
+                                    <div class="flex-container-3 m-3 text-light bg-success">{{$s->nama}}</div>
+                                @else
+                                    <div class="flex-container-3 m-3 text-light bg-danger">{{$s->nama}}</div>
+                                @endif
                             @endif
                         @endforeach
                         <!-- <div class="flex-container-1">2A2</div>
