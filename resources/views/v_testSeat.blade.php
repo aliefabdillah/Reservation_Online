@@ -157,10 +157,18 @@
                 <div class="container">
                     <div class="container-1 flex-wrap">
                         @foreach ($seat as $s)
-                            @if($s->is_available == 1)
-                                <div class="flex-container-1 m-4 text-light bg-success">{{$s->nama}}</div>
-                            @else
-                                <div class="flex-container-1 m-4 text-light bg-danger">{{$s->nama}}</div>
+                            @if(substr($s->nama, 0, 1) == "2")
+                                @if($s->is_available == 1)
+                                    <div class="flex-container-1 m-4 text-light bg-success">{{$s->nama}}</div>
+                                @else
+                                    <div class="flex-container-1 m-4 text-light bg-danger">{{$s->nama}}</div>
+                                @endif
+                            @elseif(substr($s->nama, 0, 1) == "4")
+                                @if($s->is_available == 1)
+                                    <div class="flex-container-2 m-4 text-light bg-success">{{$s->nama}}</div>
+                                @else
+                                    <div class="flex-container-2 m-4 text-light bg-danger">{{$s->nama}}</div>
+                                @endif
                             @endif
                         @endforeach
                         <!-- <div class="flex-container-1">2A2</div>
