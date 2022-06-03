@@ -44,7 +44,7 @@
                 <p>Nomor Kursi : {{$nama_tempatDuduk}}</p>
             </div>
         
-            <div class="menu container-xs rounded bg-secondary m-4 p-2 d-flex flex-column">
+            <div class="menu container-sm rounded bg-secondary p-2 d-flex flex-column" style="max-width: 1200px;">
                 <form class="d-flex flex-wrap" action="{{ route('check') }}" method="POST">
                     @csrf
                     <input type="hidden" name="seat_id" value="{{$tempatDuduk}}">
@@ -53,7 +53,8 @@
                         <div class="head1 rounded d-flex flex-row bg-white p-1 justify-content-center">
                             <p class="my-auto mx-3">Makanan</p>
                         </div>
-                        <div class="container p-1 rounded my-3">
+                    </div>
+                        <div class="container d-flex flex-wrap">
                             @php($i = 0)
                             @foreach ($makanan as $m)
                             <div class="d-flex flex-column bg-white rounded p-1 m-2">
@@ -67,8 +68,10 @@
                             </div>
                             @endforeach
                         </div>
-                        <div class="head1 rounded d-flex flex-row bg-white p-1 justify-content-center mb-3">
-                            <p class="my-auto mx-3">Minuman</p>
+                        <div class="container d-flex flex-column p-1  align-items-center">
+                            <div class="head1 rounded d-flex flex-row bg-white p-1 justify-content-center">
+                                <p class="my-auto mx-3">Minuman</p>
+                            </div>
                         </div>
                         <div class="container d-flex flex-wrap">
                             @foreach ($minuman as $m)
@@ -83,8 +86,9 @@
                             </div>
                             @endforeach
                         </div>
-                        <input class="float-right" type="submit" value="Checkout" id="submit" disabled>
-                    </div>
+                        <div class="container d-flex flex-column p-1  align-items-center">
+                            <input class="justify-content-center" type="submit" value="Checkout" id="submit" disabled>
+                        </div>
                 </form>
             </div>
         </div>
