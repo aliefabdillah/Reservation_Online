@@ -27,13 +27,6 @@ use Illuminate\Support\Facades\DB;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::post('/testPayment', [OrderController::class, 'checkout'])->name('check');
-Route::get('/testPayment', function (){
-    return view('test');
-});
-Route::get('/{transaction}', [TransactionDetailController::class, 'show']);
-Route::post('/utils/midtrans', [OrderController::class, 'midtransNotification']);
-
 
 /*=========== USER START =============*/
 // NAVBAR BUTTON logout
@@ -60,6 +53,11 @@ Route::post('/user/menu', [MenuController::class,'submitMenu'])->name('submit.me
 
 // tampilkan view invoice
 Route::get('/user/invoice/{id}', [OrderController::class,'showInvoice'])->name('invoice');                               //submit/checkout form menu dan menampilkan invoice
+
+// route pembayaran
+Route::post('/testPayment', [OrderController::class, 'checkout'])->name('check');
+Route::get('/{transaction}', [TransactionDetailController::class, 'show']);
+Route::post('/utils/midtrans', [OrderController::class, 'midtransNotification']);
 
 // Validation
 Route::get('/user/validation/{status}', [TransactionController::class, 'validationStatus'])->name('validation');
