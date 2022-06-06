@@ -62,7 +62,7 @@
                                 <p class="my-auto mx-3"> {{ $m->harga }}</p>
                                 <div class="d-flex flex-row align-items-center">
                                     @if($m->stok != 0)
-                                        <p class="my-auto mx-3"> pesan </p>
+                                        <p class="my-auto mx-3"> Pesan </p>
                                         <input type="checkbox" name="menu[{{$i++}}]" value="{{$m->id}}" onchange="checkbox(this)"><br>
                                     @else
                                     <p class="my-auto mx-3"> Habis </p>
@@ -84,7 +84,7 @@
                                 <p class="my-auto mx-3"> {{ $m->harga }}</p>
                                 <div class="d-flex flex-row align-items-center">
                                 @if($m->stok != 0)
-                                    <p class="my-auto mx-3"> pesan </p>
+                                    <p class="my-auto mx-3"> Pesan </p>
                                     <input class="m-0" type="checkbox" name="menu[{{$i++}}]" value="{{$m->id}}" onchange="checkbox(this)"><br>
                                 @else
                                     <p class="my-auto mx-3"> Habis </p>
