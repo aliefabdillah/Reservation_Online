@@ -75,7 +75,7 @@ class AdminMenuController extends Controller
         // ambil file foto
         $foto = $validateData['foto'];
         $nama_foto = $foto->getClientOriginalName();
-        $directory = 'img';
+        $directory = 'storage/img';
         $foto->move($directory, $nama_foto);
 
         $data = new Menu();
@@ -108,12 +108,12 @@ class AdminMenuController extends Controller
         ]);
 
         if ($request->foto != "") {
-            File::delete('img/'.$data_update->foto);
+            File::delete('storage/img/'.$data_update->foto);
 
             // ambil file foto
             $foto = $validateData['foto'];
             $nama_foto = $foto->getClientOriginalName();
-            $directory = 'img';
+            $directory = 'storage/img';
             $foto->move($directory, $nama_foto);
 
             $data_update->foto = $nama_foto;
@@ -137,7 +137,7 @@ class AdminMenuController extends Controller
         $data = Menu::find($id);
         $nama_menu = $data->nama;
         $kategori = $data->jenis;
-        File::delete('img/'.$data->foto);       //hapus foto
+        File::delete('storage/img/'.$data->foto);       //hapus foto
         Menu::destroy($id);
 
         if ($kategori == 'makanan') {

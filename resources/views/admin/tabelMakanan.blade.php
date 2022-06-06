@@ -169,9 +169,9 @@
                             <th>{{$loop->iteration}}</th>
                             <td class="d-none">{{$food->id}}</td>
                             <td>{{$food->nama}}</td>
-                            <td>RP. {{$food->harga}},-</td>
+                            <td>{{$food->harga}}</td>
                             <td>{{$food->stok}}</td>
-                            <td><img src="{{ url('/img/'.$food->foto) }}" width="50px" height="50px"></td>
+                            <td><img src="{{ url('storage/img/'.$food->foto) }}" width="50px" height="50px"></td>
                             <td>
                                 <div class="d-flex flex-row">
                                     <button type='button' class='btn btn-warning btn-sm me-3 editBtnMenu' data-bs-toggle="modal" data-bs-target="#formEditMenu"> Edit</button>

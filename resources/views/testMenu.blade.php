@@ -58,7 +58,7 @@
                             @php($i = 0)
                             @foreach ($makanan as $m)
                             <div class="border shadow d-flex col-12 col-md-3 flex-column bg-white rounded p-1 m-2" style="max-width: 200px;">
-                                <img src="{{ url('/img/'.$m->foto) }}" width="auto" height="auto"class="mb-3 rounded-start">
+                                <img src="{{ url('storage/img/'.$m->foto) }}" width="auto" height="auto"class="mb-3 rounded-start">
                                 <p class="fs-5 fw-bold my-auto mx-3"> {{ $m->nama }}</p>
                                 <p class="fst-italic my-auto mx-3">Rp. {{ $m->harga }},-</p>
                                 <div class="d-flex flex-row align-items-center">
@@ -81,7 +81,7 @@
                         <div class="container d-flex justify-content-center  flex-wrap">
                             @foreach ($minuman as $m)
                             <div class="border shadow d-flex flex-column bg-white rounded p-1 m-2" style="max-width: 200px;">
-                                <img src="{{ url('/img/'.$m->foto) }}" width="auto" height="auto" class="mb-3 rounded-start">
+                                <img src="{{ url('storage/img/'.$m->foto) }}" width="auto" height="auto" class="mb-3 rounded-start">
                                 <p class="fs-5 fw-bold my-auto mx-3"> {{ $m->nama }}</p>
                                 <p class="fst-italic my-auto mx-3">Rp. {{ $m->harga }},-</p>
                                 <div class="d-flex flex-row align-items-center">
