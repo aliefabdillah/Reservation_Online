@@ -19,6 +19,7 @@ class CreateMenusTable extends Migration
             $table->enum('jenis', ['makanan', 'minuman']);
             $table->integer('harga');
             $table->integer('stok');
+            $table->string('foto');
             $table->timestamps();
         });
     }
