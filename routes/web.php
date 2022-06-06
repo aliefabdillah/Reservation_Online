@@ -56,7 +56,6 @@ Route::get('/user/invoice/{id}', [OrderController::class,'showInvoice'])->name('
 
 // route pembayaran
 Route::post('/testPayment', [OrderController::class, 'checkout'])->name('check');
-Route::get('/{transaction}', [TransactionDetailController::class, 'show']);
 Route::post('/utils/midtrans', [OrderController::class, 'midtransNotification']);
 
 // Validation

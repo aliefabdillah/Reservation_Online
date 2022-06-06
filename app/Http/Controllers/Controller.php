@@ -21,15 +21,4 @@ class Controller extends BaseController
         // menampilkan view invoice
         return view('invoice');
     }
-
-    public function validationSucces()
-    {
-        return view('validationSucces');
-    }
-
-    public function validationFailed()
-    {
-        return view('validationFailed');
-    }
-
 }
