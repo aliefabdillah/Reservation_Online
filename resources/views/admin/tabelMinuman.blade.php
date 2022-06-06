@@ -15,15 +15,24 @@
                     <div class="container-md p-4 my-3 border">
                         <div class="row mb-3">
                             <label>Nama Minuman</label>  
-                            <input class="form-control" type="text" name="namaMenu" placeholder="Air Mineral" required>
+                            <input class="form-control @error('nama') is-invalid @enderror" type="text" name="nama" placeholder="Air Mineral" value="{{ old('nama') }}">
+                            @error('nama')
+                            <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="row mb-3">
                             <label>Harga</label>  
-                            <input class="form-control" type="number" name="harga" placeholder="12XXX">
+                            <input class="form-control @error('harga') is-invalid @enderror" type="text" name="harga" placeholder="12XXX" value="{{ old('harga') }}">
+                            @error('harga')
+                            <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="row mb-3">
                             <label>Stok</label>  
-                            <input class="form-control" type="number" name="stok" placeholder="100">
+                            <input class="form-control @error('stok') is-invalid @enderror" type="text" name="stok" placeholder="100" value="{{ old('stok') }}">
+                            @error('stok')
+                            <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -52,16 +61,25 @@
                     <div class="container-md p-4 my-3 border">
                         <input class="form-control" type="text" name="id" id="fid" hidden>
                         <div class="row mb-3">
-                            <label>Nama Makanan</label>  
-                            <input class="form-control" type="text" name="namaMenu" id="fnamaMenu">
+                            <label>Nama Minuman</label>  
+                            <input class="form-control  @error('nama') is-invalid @enderror" type="text" name="nama" id="fnamaMenu">
+                            @error('nama')
+                            <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="row mb-3">
                             <label>Harga</label>  
-                            <input class="form-control" type="number" name="harga" id="fharga">
+                            <input class="form-control @error('harga') is-invalid @enderror" type="text" name="harga" id="fharga">
+                            @error('harga')
+                            <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="row mb-3">
                             <label>Stok</label>  
-                            <input class="form-control" type="number" name="stok" id="fstok">
+                            <input class="form-control  @error('stok') is-invalid @enderror" type="text" name="stok" id="fstok">
+                            @error('stok')
+                            <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
                     <div class="modal-footer">

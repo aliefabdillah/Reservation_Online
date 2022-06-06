@@ -62,11 +62,19 @@ class AdminMenuController extends Controller
     // insert data menu ke database
     public function addMenu(Request $request, $kategori)
     {
+        // ambil dan validasi data dari form
+        $validateData = $request->validate([
+            'nama'          => 'required|regex:/^[a-zA-Z]+$/u|unique:menus',
+            'harga'         => 'required|numeric',
+            'stok'         => 'required|numeric',
+
+        ]);
+
         $data = new Menu();
-        $data->nama = $request->namaMenu;
+        $data->nama = $validateData['nama'];
         $data->jenis = $kategori;
-        $data->harga = $request->harga;
-        $data->stok = $request->stok;
+        $data->harga = $validateData['harga'];
+        $data->stok = $validateData['stok'];
         $data->save();
         
         if ($kategori == 'makanan') {
@@ -81,9 +89,17 @@ class AdminMenuController extends Controller
     public function editMenu(Request $request, $kategori)
     {
         $data_update = Menu::find($request->id);
-        $data_update->nama = $request->namaMenu;
-        $data_update->harga = $request->harga;
-        $data_update->stok = $request->stok;
+        // ambil dan validasi data dari form
+        $validateData = $request->validate([
+            'nama'          => 'required|regex:/^[\pL\s\-]+$/u',
+            'harga'         => 'required|numeric',
+            'stok'         => 'required|numeric',
+
+        ]);
+
+        $data_update->nama = $validateData['nama'];
+        $data_update->harga = $validateData['harga'];
+        $data_update->stok = $validateData['stok'];
         $data_update->save();
 
         if ($kategori == 'makanan') {
