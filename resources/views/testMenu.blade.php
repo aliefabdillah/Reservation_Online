@@ -38,28 +38,29 @@
             </div>
         </nav>
 
-        <div class="container">
-            <div class="stamp container-sm border border-dark m-4 p-2">
-                <p>Waktu Kedatangan : {{$waktu}}</p>
-                <p>Nomor Kursi : {{$nama_tempatDuduk}}</p>
-            </div>
-
-            <div class="menu container-sm rounded bg-secondary p-2 d-flex flex-column" style="max-width: 1200px;">
+        <div class="container-responsive">
+            <div class="menu container-sm rounded p-2 d-flex flex-column" style="max-width: 1000px;">
+                <div class="stamp container-sm border border-dark m-4 p-2">
+                    <p>Waktu Kedatangan : {{$waktu}}</p>
+                    <p>Nomor Kursi : {{$nama_tempatDuduk}}</p>
+                </div>
+                
                 <form class="d-flex flex-wrap" action="{{ route('check') }}" method="POST">
                     @csrf
                     <input type="hidden" name="seat_id" value="{{$tempatDuduk}}">
                     <input type="hidden" name="waktu" value="{{$waktu}}">
                     <div class="container d-flex flex-column p-1 mt-3 align-items-center">
-                        <div class="head1 rounded d-flex flex-row bg-white p-1 justify-content-center">
+                        <div class="head1 border shadow rounded d-flex flex-row bg-white p-1 justify-content-center">
                             <p class="my-auto mx-3">Makanan</p>
                         </div>
                     </div>
                         <div class="container d-flex justify-content-center flex-wrap">
                             @php($i = 0)
                             @foreach ($makanan as $m)
-                            <div class="d-flex  col-12 col-md-3 flex-column bg-white rounded p-1 m-2" style="max-width: 200px;">
-                                <p class="my-auto mx-3"> {{ $m->nama }}</p>
-                                <p class="my-auto mx-3"> {{ $m->harga }}</p>
+                            <div class="border shadow d-flex col-12 col-md-3 flex-column bg-white rounded p-1 m-2" style="max-width: 200px;">
+                                <img src="{{ url('/img/'.$m->foto) }}" width="auto" height="auto"class="mb-3 rounded-start">
+                                <p class="fs-5 fw-bold my-auto mx-3"> {{ $m->nama }}</p>
+                                <p class="fst-italic my-auto mx-3">Rp. {{ $m->harga }},-</p>
                                 <div class="d-flex flex-row align-items-center">
                                     @if($m->stok != 0)
                                         <p class="my-auto mx-3"> Pesan </p>
@@ -73,15 +74,16 @@
                             @endforeach
                         </div>
                         <div class="container d-flex flex-column mt-3 p-1  align-items-center">
-                            <div class="head1 rounded d-flex flex-row bg-white p-1 justify-content-center">
+                            <div class="head1 border shadow rounded d-flex flex-row bg-white p-1 justify-content-center">
                                 <p class="my-auto mx-3">Minuman</p>
                             </div>
                         </div>
                         <div class="container d-flex justify-content-center  flex-wrap">
                             @foreach ($minuman as $m)
-                            <div class="d-flex flex-column bg-white rounded p-1 m-2">
-                                <p class="my-auto mx-3"> {{ $m->nama }}</p>
-                                <p class="my-auto mx-3"> {{ $m->harga }}</p>
+                            <div class="border shadow d-flex flex-column bg-white rounded p-1 m-2" style="max-width: 200px;">
+                                <img src="{{ url('/img/'.$m->foto) }}" width="auto" height="auto" class="mb-3 rounded-start">
+                                <p class="fs-5 fw-bold my-auto mx-3"> {{ $m->nama }}</p>
+                                <p class="fst-italic my-auto mx-3">Rp. {{ $m->harga }},-</p>
                                 <div class="d-flex flex-row align-items-center">
                                 @if($m->stok != 0)
                                     <p class="my-auto mx-3"> Pesan </p>
@@ -90,12 +92,12 @@
                                     <p class="my-auto mx-3"> Habis </p>
                                 @endif
                                 </div>
-                                <input class="my-auto mx-3 w-25" type="number" name="qty[]" value="0" onkeyup="noMinus(this)" readonly ><br>
+                                <input class="text-center my-auto mx-3 w-25" type="number" name="qty[]" value="0" onkeyup="noMinus(this)" readonly ><br>
                             </div>
                             @endforeach
                         </div>
                         <div class="container d-flex flex-column p-1  align-items-center">
-                            <input class="btn-primary w-25" type="submit" value="Checkout" id="submit" disabled>
+                            <input class="btn btn-primary rounded w-25" type="submit" value="Checkout" id="submit" disabled>
                         </div>
                 </form>
             </div>

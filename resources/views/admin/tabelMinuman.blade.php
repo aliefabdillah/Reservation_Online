@@ -10,7 +10,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form class="form" action="{{ route('addMenu', ['kategori' => 'minuman']) }}" method="post">
+                <form class="form" action="{{ route('addMenu', ['kategori' => 'minuman']) }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="container-md p-4 my-3 border">
                         <div class="row mb-3">
@@ -31,6 +31,13 @@
                             <label>Stok</label>  
                             <input class="form-control @error('stok') is-invalid @enderror" type="text" name="stok" placeholder="100" value="{{ old('stok') }}">
                             @error('stok')
+                            <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="row mb-3">
+                            <label>Foto</label>  
+                            <input class="form-control @error('foto') is-invalid @enderror" type="file" name="foto">
+                            @error('foto')
                             <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
@@ -55,7 +62,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form class="form" action="{{ route('editMenu', ['kategori' => 'minuman']) }}" method="post">
+                <form class="form" action="{{ route('editMenu', ['kategori' => 'minuman']) }}" method="post" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div class="container-md p-4 my-3 border">
@@ -78,6 +85,13 @@
                             <label>Stok</label>  
                             <input class="form-control  @error('stok') is-invalid @enderror" type="text" name="stok" id="fstok">
                             @error('stok')
+                            <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="row mb-3">
+                            <label>foto</label>  
+                            <input class="form-control  @error('foto') is-invalid @enderror" type="file" name="foto" id="ffoto">
+                            @error('foto')
                             <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
@@ -145,6 +159,7 @@
                         <th>Nama</th>
                         <th>Harga</th>
                         <th>Stok</th>
+                        <th>Foto</th>
                         <th>Action</th>
                         </tr>
                     </thead>
@@ -154,8 +169,9 @@
                             <th>{{$loop->iteration}}</th>
                             <td class="d-none">{{$drink->id}}</td>
                             <td>{{$drink->nama}}</td>
-                            <td>{{$drink->harga}}</td>
+                            <td>RP. {{$drink->harga}},-</td>
                             <td>{{$drink->stok}}</td>
+                            <td><img src="{{ url('/img/'.$drink->foto) }}" width="50px" height="auto"></td>
                             <td>
                                 <div class="d-flex flex-row">
                                     <button type='button' class='btn btn-warning btn-sm me-3 editBtnMenu' data-bs-toggle="modal" data-bs-target="#formEditMenu"> Edit</button>

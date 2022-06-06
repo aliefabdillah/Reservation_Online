@@ -6,6 +6,7 @@ use App\Models\Menu;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\File;
 
 class AdminMenuController extends Controller
 {
@@ -64,17 +65,25 @@ class AdminMenuController extends Controller
     {
         // ambil dan validasi data dari form
         $validateData = $request->validate([
-            'nama'          => 'required|regex:/^[a-zA-Z]+$/u|unique:menus',
+            'nama'          => 'required|regex:/^[\pL\s\-]+$/u|unique:menus',
             'harga'         => 'required|numeric',
-            'stok'         => 'required|numeric',
+            'stok'          => 'required|numeric',
+            'foto'          => 'required|image|mimes:jpeg,png,jpg|max:2048',
 
         ]);
+
+        // ambil file foto
+        $foto = $validateData['foto'];
+        $nama_foto = $foto->getClientOriginalName();
+        $directory = 'img';
+        $foto->move($directory, $nama_foto);
 
         $data = new Menu();
         $data->nama = $validateData['nama'];
         $data->jenis = $kategori;
         $data->harga = $validateData['harga'];
         $data->stok = $validateData['stok'];
+        $data->foto = $nama_foto;
         $data->save();
         
         if ($kategori == 'makanan') {
@@ -93,10 +102,23 @@ class AdminMenuController extends Controller
         $validateData = $request->validate([
             'nama'          => 'required|regex:/^[\pL\s\-]+$/u',
             'harga'         => 'required|numeric',
-            'stok'         => 'required|numeric',
+            'stok'          => 'required|numeric',
+            'foto'          => 'image|mimes:jpeg,png,jpg|max:2048',
 
         ]);
 
+        if ($request->foto != "") {
+            File::delete('img/'.$data_update->foto);
+
+            // ambil file foto
+            $foto = $validateData['foto'];
+            $nama_foto = $foto->getClientOriginalName();
+            $directory = 'img';
+            $foto->move($directory, $nama_foto);
+
+            $data_update->foto = $nama_foto;
+        }
+        
         $data_update->nama = $validateData['nama'];
         $data_update->harga = $validateData['harga'];
         $data_update->stok = $validateData['stok'];
@@ -115,6 +137,7 @@ class AdminMenuController extends Controller
         $data = Menu::find($id);
         $nama_menu = $data->nama;
         $kategori = $data->jenis;
+        File::delete('img/'.$data->foto);       //hapus foto
         Menu::destroy($id);
 
         if ($kategori == 'makanan') {
