@@ -8,6 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Menu extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'nama',
+        'jenis',
+        'harga',
+        'stok',
+        'foto',
+        // atribut lain yang diizinkan untuk pengisian massal
+    ];
     
     protected $guarded = [];
 
